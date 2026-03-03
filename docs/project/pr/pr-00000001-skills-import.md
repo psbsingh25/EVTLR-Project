@@ -17,16 +17,16 @@
 
 ### What changed and why
 
-This PR (record) initiates the planned import of agent skills from the public repository `https://github.com/borealBytes/ag-skills/tree/main/skills-content` into this repository using the Agent Skills IO format (https://agentskills.io/home). The goal is to ensure these skills are available and always referenced by this repo when agent functionality is used.
+This PR (record) initiates the planned import of agent skills from the public repository `https://github.com/borealBytes/ag-skills/tree/main/skills-content` into this repository using the Agent Skills IO format (<https://agentskills.io/home>). The goal is to ensure these skills are available and always referenced by this repo when agent functionality is used.
 
 ### Impact classification
 
-| Dimension | Level | Notes |
-| --- | --- | --- |
-| **Risk** | 🟡 Medium | Repo integration work, but non-destructive initially (adds files and loaders). |
-| **Scope** | Narrow → Moderate | Adds a `skills/` import area and loader logic; may touch bootstrapping code later. |
-| **Reversibility** | Easily reversible | Can remove the `skills/` directory and loader changes. |
-| **Security** | Low | We'll scan imported dependencies and check license. |
+| Dimension         | Level             | Notes                                                                              |
+| ----------------- | ----------------- | ---------------------------------------------------------------------------------- |
+| **Risk**          | 🟡 Medium         | Repo integration work, but non-destructive initially (adds files and loaders).     |
+| **Scope**         | Narrow → Moderate | Adds a `skills/` import area and loader logic; may touch bootstrapping code later. |
+| **Reversibility** | Easily reversible | Can remove the `skills/` directory and loader changes.                             |
+| **Security**      | Low               | We'll scan imported dependencies and check license.                                |
 
 ---
 
@@ -34,11 +34,11 @@ This PR (record) initiates the planned import of agent skills from the public re
 
 ### Change inventory
 
-| File / Area | Change type | Description |
-| --- | --- | --- |
-| `skills/` | Added | Vendor/imported skills content from `borealBytes/ag-skills` (selected subset). |
-| `scripts/` or `src/` | Added/Modified (future) | Add a skills loader that checks for agent skills at runtime and prefers them first. |
-| `docs/project/pr/pr-00000001-skills-import.md` | Added | This PR record (you are reading it). |
+| File / Area                                    | Change type             | Description                                                                         |
+| ---------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------- |
+| `skills/`                                      | Added                   | Vendor/imported skills content from `borealBytes/ag-skills` (selected subset).      |
+| `scripts/` or `src/`                           | Added/Modified (future) | Add a skills loader that checks for agent skills at runtime and prefers them first. |
+| `docs/project/pr/pr-00000001-skills-import.md` | Added                   | This PR record (you are reading it).                                                |
 
 ### Architecture impact
 

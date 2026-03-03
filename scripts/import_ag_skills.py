@@ -8,8 +8,10 @@ generates a simple Agent Skills IO-style YAML manifest per module under
 It is intentionally conservative: it does not execute vendor code. It only
 inspects filenames and top-level docstrings to populate manifests.
 """
-from pathlib import Path
+
 import re
+from pathlib import Path
+
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,10 +19,12 @@ VENDOR = ROOT / "skills" / "vendor" / "ag-skills"
 SRC = VENDOR / "src" / "ag_skills"
 MANIFEST_DIR = ROOT / "skills" / "manifests"
 
+
 def extract_description(pyfile: Path) -> str:
     text = pyfile.read_text(encoding="utf-8")
     m = re.search(r'"""([\s\S]*?)"""', text)
     return (m.group(1).strip()) if m else ""
+
 
 def main():
     MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
@@ -42,6 +46,7 @@ def main():
         out = MANIFEST_DIR / f"{name}.yaml"
         out.write_text(yaml.safe_dump(manifest), encoding="utf-8")
         print("Wrote", out)
+
 
 if __name__ == "__main__":
     main()
