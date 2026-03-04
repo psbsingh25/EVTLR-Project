@@ -43,6 +43,7 @@ data/
 - [x] Saved to `data/boundaries/nm_top_200_fields.geojson`
 
 **Target Counties:**
+
 | County | FIPS Code | Fields |
 |--------|-----------|--------|
 | Lea | 35025 | ~85 |
@@ -111,6 +112,7 @@ data/
 - [x] Started HTTP server (port 8000) for viewing
 
 **Maps Created:**
+
 | Map | File | Description |
 |-----|------|-------------|
 | All Fields | `my_fields_map.html` | 199 fields by crop type |

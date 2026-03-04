@@ -89,15 +89,7 @@
       "source": "skills/vendor/ag-skills/cdl-cropland/",
       "entry": "skills.vendor.ag-skills.cdl-cropland",
       "category": "data-download",
-      "tags": [
-        "usda",
-        "nass",
-        "cdl",
-        "cropland",
-        "raster",
-        "geospatial",
-        "download"
-      ],
+      "tags": ["usda", "nass", "cdl", "cropland", "raster", "geospatial", "download"],
       "imported_at": "2026-03-04T04:07:10.859472Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -110,13 +102,7 @@
       "source": "skills/vendor/ag-skills/eda-compare/",
       "entry": "skills.vendor.ag-skills.eda-compare",
       "category": "eda",
-      "tags": [
-        "comparison",
-        "statistics",
-        "groups",
-        "pandas",
-        "scipy"
-      ],
+      "tags": ["comparison", "statistics", "groups", "pandas", "scipy"],
       "imported_at": "2026-03-04T04:07:10.865846Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -129,13 +115,7 @@
       "source": "skills/vendor/ag-skills/eda-correlate/",
       "entry": "skills.vendor.ag-skills.eda-correlate",
       "category": "eda",
-      "tags": [
-        "correlation",
-        "statistics",
-        "pandas",
-        "scipy",
-        "analysis"
-      ],
+      "tags": ["correlation", "statistics", "pandas", "scipy", "analysis"],
       "imported_at": "2026-03-04T04:07:10.868561Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -148,13 +128,7 @@
       "source": "skills/vendor/ag-skills/eda-explore/",
       "entry": "skills.vendor.ag-skills.eda-explore",
       "category": "eda",
-      "tags": [
-        "eda",
-        "exploration",
-        "pandas",
-        "statistics",
-        "analysis"
-      ],
+      "tags": ["eda", "exploration", "pandas", "statistics", "analysis"],
       "imported_at": "2026-03-04T04:07:10.870902Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -167,14 +141,7 @@
       "source": "skills/vendor/ag-skills/eda-time-series/",
       "entry": "skills.vendor.ag-skills.eda-time-series",
       "category": "eda",
-      "tags": [
-        "eda",
-        "time-series",
-        "pandas",
-        "matplotlib",
-        "agriculture",
-        "forecasting"
-      ],
+      "tags": ["eda", "time-series", "pandas", "matplotlib", "agriculture", "forecasting"],
       "imported_at": "2026-03-04T04:07:10.873938Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -187,13 +154,7 @@
       "source": "skills/vendor/ag-skills/eda-visualize/",
       "entry": "skills.vendor.ag-skills.eda-visualize",
       "category": "eda",
-      "tags": [
-        "visualization",
-        "plotting",
-        "matplotlib",
-        "seaborn",
-        "pandas"
-      ],
+      "tags": ["visualization", "plotting", "matplotlib", "seaborn", "pandas"],
       "imported_at": "2026-03-04T04:07:10.876486Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -206,13 +167,7 @@
       "source": "skills/vendor/ag-skills/field-boundaries/",
       "entry": "skills.vendor.ag-skills.field-boundaries",
       "category": "data-download",
-      "tags": [
-        "usda",
-        "nass",
-        "boundaries",
-        "geospatial",
-        "download"
-      ],
+      "tags": ["usda", "nass", "boundaries", "geospatial", "download"],
       "imported_at": "2026-03-04T04:07:10.881418Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -225,15 +180,7 @@
       "source": "skills/vendor/ag-skills/interactive-web-map/",
       "entry": "skills.vendor.ag-skills.interactive-web-map",
       "category": "data-download",
-      "tags": [
-        "web-map",
-        "visualization",
-        "leaflet",
-        "geospatial",
-        "interactive",
-        "dashboard",
-        "choropleth"
-      ],
+      "tags": ["web-map", "visualization", "leaflet", "geospatial", "interactive", "dashboard", "choropleth"],
       "imported_at": "2026-03-04T04:07:10.884506Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -246,15 +193,7 @@
       "source": "skills/vendor/ag-skills/landsat-imagery/",
       "entry": "skills.vendor.ag-skills.landsat-imagery",
       "category": "data-download",
-      "tags": [
-        "landsat",
-        "usgs",
-        "satellite",
-        "ndvi",
-        "rasterio",
-        "remote-sensing",
-        "geospatial"
-      ],
+      "tags": ["landsat", "usgs", "satellite", "ndvi", "rasterio", "remote-sensing", "geospatial"],
       "imported_at": "2026-03-04T04:07:10.887481Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -267,15 +206,7 @@
       "source": "skills/vendor/ag-skills/nasa-power-weather/",
       "entry": "skills.vendor.ag-skills.nasa-power-weather",
       "category": "data-download",
-      "tags": [
-        "nasa",
-        "power",
-        "weather",
-        "climate",
-        "agriculture",
-        "api",
-        "gdd"
-      ],
+      "tags": ["nasa", "power", "weather", "climate", "agriculture", "api", "gdd"],
       "imported_at": "2026-03-04T04:07:10.890594Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     },
@@ -301,14 +232,7 @@
       "source": "skills/vendor/ag-skills/ssurgo-soil/",
       "entry": "skills.vendor.ag-skills.ssurgo-soil",
       "category": "data-download",
-      "tags": [
-        "usda",
-        "nrcs",
-        "ssurgo",
-        "soil",
-        "geospatial",
-        "download"
-      ],
+      "tags": ["usda", "nrcs", "ssurgo", "soil", "geospatial", "download"],
       "imported_at": "2026-03-04T04:07:10.901641Z",
       "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
     }

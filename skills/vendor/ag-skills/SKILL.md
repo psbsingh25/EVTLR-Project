@@ -309,18 +309,18 @@ print("  - data/plots/field_sizes.png")
 
 Each `data/` folder should have a README:
 
-```markdown
+````markdown
 # Data Outputs
 
 This directory contains generated data. DO NOT COMMIT TO GIT.
 
 ## Contents
 
-| File | Script | Description |
-|------|--------|-------------|
+| File                | Script             | Description         |
+| ------------------- | ------------------ | ------------------- |
 | fields_2024.geojson | download_fields.py | 20 corn belt fields |
-| summary_stats.csv | analyze_fields.py | Statistical summary |
-| plots/*.png | visualize.py | Generated plots |
+| summary_stats.csv   | analyze_fields.py  | Statistical summary |
+| plots/\*.png        | visualize.py       | Generated plots     |
 
 ## Regeneration
 
@@ -332,7 +332,9 @@ python download_fields.py
 python analyze_fields.py
 python visualize.py
 ```
-```
+````
+
+````
 
 ## Best Practices
 ## Best Practices
@@ -368,7 +370,7 @@ python visualize.py
 ```bash
 cd .skills/<skill-name>
 uv run --with <package> python
-```
+````
 
 ### "No fields returned"
 
@@ -388,11 +390,11 @@ fields = download_fields(count=2)  # Fewer = faster
 
 ## Resources
 
-- **Source Cooperative**: https://source.coop/fiboa/us-usda-cropland
-- **USDA NASS**: https://www.nass.usda.gov
-- **NASA POWER**: https://power.larc.nasa.gov
-- **USGS Earth Explorer**: https://earthexplorer.usgs.gov
-- **Sentinel Hub**: https://www.sentinel-hub.com
+- **Source Cooperative**: <https://source.coop/fiboa/us-usda-cropland>
+- **USDA NASS**: <https://www.nass.usda.gov>
+- **NASA POWER**: <https://power.larc.nasa.gov>
+- **USGS Earth Explorer**: <https://earthexplorer.usgs.gov>
+- **Sentinel Hub**: <https://www.sentinel-hub.com>
 
 ## Citation
 
@@ -406,5 +408,5 @@ Available at https://nassgeodata.gmu.edu/CropScape/
 
 For issues or questions:
 
-- **GitHub Issues**: https://github.com/borealBytes/ag-skills/issues
+- **GitHub Issues**: <https://github.com/borealBytes/ag-skills/issues>
 - **Documentation**: See individual skill SKILL.md files

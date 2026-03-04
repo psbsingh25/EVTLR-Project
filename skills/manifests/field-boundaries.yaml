@@ -1,17 +1,18 @@
 name: field-boundaries
 version: 1.0.0
 author: Boreal Bytes
-description: Download USDA NASS Crop Sequence Boundaries for agricultural fields.
-  Includes functions for downloading, visualizing, and exporting field boundary data.
+description:
+  Download USDA NASS Crop Sequence Boundaries for agricultural fields. Includes
+  functions for downloading, visualizing, and exporting field boundary data.
 license: MIT
 source: skills/vendor/ag-skills/field-boundaries/
 entry: skills.vendor.ag-skills.field-boundaries
 category: data-download
 tags:
-- usda
-- nass
-- boundaries
-- geospatial
-- download
+  - usda
+  - nass
+  - boundaries
+  - geospatial
+  - download
 imported_at: '2026-03-04T04:07:10.881418Z'
 original_repo: https://github.com/borealBytes/ag-skills/tree/skills-content

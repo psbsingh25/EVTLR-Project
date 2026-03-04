@@ -552,19 +552,19 @@ NASA Langley Research Center. https://power.larc.nasa.gov/
 
 ## 🔗 References
 
-[^1]: borealBytes/ag-skills repository - https://github.com/borealBytes/ag-skills/tree/skills-content
+[^1]: borealBytes/ag-skills repository - <https://github.com/borealBytes/ag-skills/tree/skills-content>
 
-[^2]: USDA NASS - https://www.nass.usda.gov
+[^2]: USDA NASS - <https://www.nass.usda.gov>
 
-[^3]: USDA NRCS SSURGO - https://www.nrcs.usda.gov/wps/portal/nrcs/main/soils/survey/geo/
+[^3]: USDA NRCS SSURGO - <https://www.nrcs.usda.gov/wps/portal/nrcs/main/soils/survey/geo/>
 
-[^4]: NASA POWER - https://power.larc.nasa.gov/
+[^4]: NASA POWER - <https://power.larc.nasa.gov/>
 
-[^5]: ESA Sentinel-2 - https://sentinel.esa.int/web/sentinel/missions/sentinel-2
+[^5]: ESA Sentinel-2 - <https://sentinel.esa.int/web/sentinel/missions/sentinel-2>
 
-[^6]: USGS Landsat - https://earthexplorer.usgs.gov/
+[^6]: USGS Landsat - <https://earthexplorer.usgs.gov/>
 
-[^7]: USDA NASS CDL - https://nassgeodata.gmu.edu/CropScape/
+[^7]: USDA NASS CDL - <https://nassgeodata.gmu.edu/CropScape/>
 
 ---
 

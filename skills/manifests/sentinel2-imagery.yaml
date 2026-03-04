@@ -1,9 +1,10 @@
 name: sentinel2-imagery
 version: 1.0.0
 author: Boreal Bytes
-description: Download Sentinel-2 Level-2A imagery for an AOI, compute NDVI with rasterio,
-  and extract per-field NDVI statistics. Use when you need cloud-filtered Sentinel-2
-  scenes and field-level vegetation metrics.
+description:
+  Download Sentinel-2 Level-2A imagery for an AOI, compute NDVI with rasterio,
+  and extract per-field NDVI statistics. Use when you need cloud-filtered
+  Sentinel-2 scenes and field-level vegetation metrics.
 license: MIT
 source: skills/vendor/ag-skills/sentinel2-imagery/
 entry: skills.vendor.ag-skills.sentinel2-imagery
