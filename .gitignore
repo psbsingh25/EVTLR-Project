@@ -125,6 +125,7 @@ test-results/
 .cache/
 tmp/
 temp/
+.tmp_ag_skills/
 
 # ===========================
 # Data files - exclude all generated data
