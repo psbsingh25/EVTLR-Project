@@ -125,3 +125,17 @@ test-results/
 .cache/
 tmp/
 temp/
+
+# ===========================
+# Data files - exclude all generated data
+# ===========================
+data/boundaries/**
+data/soil/**
+data/weather/**
+data/crops/**
+data/imagery/**
+
+# But keep the directory structure and documentation
+!data/.gitkeep
+!data/README.md
+!data/**/README.md
