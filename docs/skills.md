@@ -24,6 +24,9 @@ This repository includes **12 agent skills** for agricultural data analysis, imp
 _The following diagram shows how skills are automatically discovered and registered when the src package is imported._
 
 ```mermaid
+---
+id: 8fada957-9752-4caa-999a-127fc9eeb088
+---
 flowchart TD
     accTitle: Skills Auto-Discovery Flow
     accDescr: Shows the flow from package import through manifest discovery to registry generation
@@ -97,6 +100,9 @@ _Field-boundaries is the root skill that most other data download skills depend 
 _The following diagram shows the dependency relationships between skills._
 
 ```mermaid
+---
+id: efc3bc08-7df2-40bf-9b27-f714a2bbb5ca
+---
 graph TD
     accTitle: Skills Dependency Chain
     accDescr: Shows which skills depend on field-boundaries versus standalone EDA skills
@@ -552,19 +558,19 @@ NASA Langley Research Center. https://power.larc.nasa.gov/
 
 ## 🔗 References
 
-[^1]: borealBytes/ag-skills repository - https://github.com/borealBytes/ag-skills/tree/skills-content
+[^1]: borealBytes/ag-skills repository - <https://github.com/borealBytes/ag-skills/tree/skills-content>
 
-[^2]: USDA NASS - https://www.nass.usda.gov
+[^2]: USDA NASS - <https://www.nass.usda.gov>
 
-[^3]: USDA NRCS SSURGO - https://www.nrcs.usda.gov/wps/portal/nrcs/main/soils/survey/geo/
+[^3]: USDA NRCS SSURGO - <https://www.nrcs.usda.gov/wps/portal/nrcs/main/soils/survey/geo/>
 
-[^4]: NASA POWER - https://power.larc.nasa.gov/
+[^4]: NASA POWER - <https://power.larc.nasa.gov/>
 
-[^5]: ESA Sentinel-2 - https://sentinel.esa.int/web/sentinel/missions/sentinel-2
+[^5]: ESA Sentinel-2 - <https://sentinel.esa.int/web/sentinel/missions/sentinel-2>
 
-[^6]: USGS Landsat - https://earthexplorer.usgs.gov/
+[^6]: USGS Landsat - <https://earthexplorer.usgs.gov/>
 
-[^7]: USDA NASS CDL - https://nassgeodata.gmu.edu/CropScape/
+[^7]: USDA NASS CDL - <https://nassgeodata.gmu.edu/CropScape/>
 
 ---
 
