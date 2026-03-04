@@ -1,0 +1,738 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"
+    />
+
+    <meta
+      name="viewport"
+      content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <style>
+      #map_da36c18b3d4fd1acdb8c508d87e3452c {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+      }
+      .leaflet-container {
+        font-size: 1rem;
+      }
+    </style>
+
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <style>
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+      }
+    </style>
+
+    <script>
+      L_NO_TOUCH = false;
+      L_DISABLE_3D = false;
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"
+    />
+  </head>
+  <body>
+    <div
+      style="
+        position: fixed;
+        top: 10px;
+        left: 50px;
+        width: 300px;
+        background-color: white;
+        padding: 10px;
+        border: 2px solid grey;
+        z-index: 9999;
+        font-size: 16px;
+        font-weight: bold;
+      "
+    >
+      🌽 Corn Fields in Southern High Plains Aquifer<br />
+      <span style="font-size: 12px; font-weight: normal">
+        Lea, Roosevelt, and Curry Counties, NM
+      </span>
+    </div>
+
+    <div
+      style="
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        width: 180px;
+        border: 2px solid grey;
+        z-index: 9999;
+        background-color: white;
+        padding: 10px;
+        font-size: 14px;
+      "
+    >
+      <b>Legend</b><br />
+      <i
+        style="
+          background: #ffd700;
+          width: 12px;
+          height: 12px;
+          display: inline-block;
+          margin-right: 5px;
+        "
+      ></i
+      >Corn Fields<br />
+      <i style="color: orange; display: inline-block; margin-right: 5px">🌽</i
+      >Field Centers<br />
+      <hr style="margin: 5px 0" />
+      <b>Counties:</b><br />
+      • Roosevelt: 3 fields<br />• Curry: 2 fields<br />
+    </div>
+
+    <div class="folium-map" id="map_da36c18b3d4fd1acdb8c508d87e3452c"></div>
+  </body>
+  <script>
+    var map_da36c18b3d4fd1acdb8c508d87e3452c = L.map(
+      'map_da36c18b3d4fd1acdb8c508d87e3452c',
+      {
+        center: [34.28564826125802, -103.41776693518572],
+        crs: L.CRS.EPSG3857,
+        ...{
+          zoom: 10,
+          zoomControl: true,
+          preferCanvas: false,
+        },
+      }
+    );
+
+    var tile_layer_6979005b98e21b44be89377d7a612cc8 = L.tileLayer(
+      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        minZoom: 0,
+        maxZoom: 19,
+        maxNativeZoom: 19,
+        noWrap: false,
+        attribution:
+          '\u0026copy; \u003ca href="https://www.openstreetmap.org/copyright"\u003eOpenStreetMap\u003c/a\u003e contributors',
+        subdomains: 'abc',
+        detectRetina: false,
+        tms: false,
+        opacity: 1,
+      }
+    );
+
+    tile_layer_6979005b98e21b44be89377d7a612cc8.addTo(
+      map_da36c18b3d4fd1acdb8c508d87e3452c
+    );
+
+    var tile_layer_bac07102549711c88a671b1c8b12cf8d = L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {
+        minZoom: 0,
+        maxZoom: 18,
+        maxNativeZoom: 18,
+        noWrap: false,
+        attribution: 'Esri',
+        subdomains: 'abc',
+        detectRetina: false,
+        tms: false,
+        opacity: 1,
+      }
+    );
+
+    tile_layer_bac07102549711c88a671b1c8b12cf8d.addTo(
+      map_da36c18b3d4fd1acdb8c508d87e3452c
+    );
+
+    function geo_json_58c361b041d39909db2ec2693548ebb5_styler(feature) {
+      switch (feature.id) {
+        default:
+          return {
+            color: 'darkgoldenrod',
+            fillColor: '#FFD700',
+            fillOpacity: 0.8,
+            weight: 2,
+          };
+      }
+    }
+
+    function geo_json_58c361b041d39909db2ec2693548ebb5_onEachFeature(
+      feature,
+      layer
+    ) {
+      layer.on({});
+    }
+    var geo_json_58c361b041d39909db2ec2693548ebb5 = L.geoJson(null, {
+      onEachFeature: geo_json_58c361b041d39909db2ec2693548ebb5_onEachFeature,
+
+      style: geo_json_58c361b041d39909db2ec2693548ebb5_styler,
+      ...{},
+    });
+
+    function geo_json_58c361b041d39909db2ec2693548ebb5_add(data) {
+      geo_json_58c361b041d39909db2ec2693548ebb5.addData(data);
+    }
+    geo_json_58c361b041d39909db2ec2693548ebb5_add({
+      features: [
+        {
+          geometry: {
+            coordinates: [
+              [
+                [-103.36963626055956, 34.04059116043637],
+                [-103.36372570945571, 34.04059116043637],
+                [-103.36372570945571, 34.048181414097805],
+                [-103.36963626055956, 34.048181414097805],
+                [-103.36963626055956, 34.04059116043637],
+              ],
+            ],
+            type: 'Polygon',
+          },
+          id: '0',
+          type: 'Feature',
+        },
+      ],
+      type: 'FeatureCollection',
+    });
+
+    var popup_1196675d35c732e8b9327c31b29eab95 = L.popup({
+      maxWidth: 300,
+    });
+
+    var html_7dbd80ed9ee91000a71b8cefb3e8f4d6 = $(
+      `<div id="html_7dbd80ed9ee91000a71b8cefb3e8f4d6" style="width: 100.0%; height: 100.0%;">         <b>Field ID:</b> NM_FIELD_025<br>         <b>County:</b> Roosevelt<br>         <b>Area:</b> 1108.6 acres<br>         <b>Crop:</b> Corn<br>         <b>Years with Corn:</b> 2014         </div>`
+    )[0];
+    popup_1196675d35c732e8b9327c31b29eab95.setContent(
+      html_7dbd80ed9ee91000a71b8cefb3e8f4d6
+    );
+
+    geo_json_58c361b041d39909db2ec2693548ebb5.bindPopup(
+      popup_1196675d35c732e8b9327c31b29eab95
+    );
+
+    geo_json_58c361b041d39909db2ec2693548ebb5.addTo(
+      map_da36c18b3d4fd1acdb8c508d87e3452c
+    );
+
+    function geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80_styler(feature) {
+      switch (feature.id) {
+        default:
+          return {
+            color: 'darkgoldenrod',
+            fillColor: '#FFD700',
+            fillOpacity: 0.8,
+            weight: 2,
+          };
+      }
+    }
+
+    function geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80_onEachFeature(
+      feature,
+      layer
+    ) {
+      layer.on({});
+    }
+    var geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80 = L.geoJson(null, {
+      onEachFeature: geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80_onEachFeature,
+
+      style: geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80_styler,
+      ...{},
+    });
+
+    function geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80_add(data) {
+      geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80.addData(data);
+    }
+    geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80_add({
+      features: [
+        {
+          geometry: {
+            coordinates: [
+              [
+                [-103.57956478031892, 33.95344467751845],
+                [-103.57157706367224, 33.95344467751845],
+                [-103.57157706367224, 33.95683030230022],
+                [-103.57956478031892, 33.95683030230022],
+                [-103.57956478031892, 33.95344467751845],
+              ],
+            ],
+            type: 'Polygon',
+          },
+          id: '0',
+          type: 'Feature',
+        },
+      ],
+      type: 'FeatureCollection',
+    });
+
+    var popup_96788c72a5dba3698fa1fef695d960e9 = L.popup({
+      maxWidth: 300,
+    });
+
+    var html_d404481ef60ee8f6f9d44bafc3035900 = $(
+      `<div id="html_d404481ef60ee8f6f9d44bafc3035900" style="width: 100.0%; height: 100.0%;">         <b>Field ID:</b> NM_FIELD_065<br>         <b>County:</b> Roosevelt<br>         <b>Area:</b> 668.3 acres<br>         <b>Crop:</b> Corn<br>         <b>Years with Corn:</b> 2020         </div>`
+    )[0];
+    popup_96788c72a5dba3698fa1fef695d960e9.setContent(
+      html_d404481ef60ee8f6f9d44bafc3035900
+    );
+
+    geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80.bindPopup(
+      popup_96788c72a5dba3698fa1fef695d960e9
+    );
+
+    geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80.addTo(
+      map_da36c18b3d4fd1acdb8c508d87e3452c
+    );
+
+    function geo_json_0c6d0596c92cccaee6389e2b22eec4ba_styler(feature) {
+      switch (feature.id) {
+        default:
+          return {
+            color: 'darkgoldenrod',
+            fillColor: '#FFD700',
+            fillOpacity: 0.8,
+            weight: 2,
+          };
+      }
+    }
+
+    function geo_json_0c6d0596c92cccaee6389e2b22eec4ba_onEachFeature(
+      feature,
+      layer
+    ) {
+      layer.on({});
+    }
+    var geo_json_0c6d0596c92cccaee6389e2b22eec4ba = L.geoJson(null, {
+      onEachFeature: geo_json_0c6d0596c92cccaee6389e2b22eec4ba_onEachFeature,
+
+      style: geo_json_0c6d0596c92cccaee6389e2b22eec4ba_styler,
+      ...{},
+    });
+
+    function geo_json_0c6d0596c92cccaee6389e2b22eec4ba_add(data) {
+      geo_json_0c6d0596c92cccaee6389e2b22eec4ba.addData(data);
+    }
+    geo_json_0c6d0596c92cccaee6389e2b22eec4ba_add({
+      features: [
+        {
+          geometry: {
+            coordinates: [
+              [
+                [-103.205241931596, 34.622382152064574],
+                [-103.19953733613157, 34.622382152064574],
+                [-103.19953733613157, 34.626374939193084],
+                [-103.205241931596, 34.626374939193084],
+                [-103.205241931596, 34.622382152064574],
+              ],
+            ],
+            type: 'Polygon',
+          },
+          id: '0',
+          type: 'Feature',
+        },
+      ],
+      type: 'FeatureCollection',
+    });
+
+    var popup_32241735e0f24f668b9c30e7b38a7589 = L.popup({
+      maxWidth: 300,
+    });
+
+    var html_34439c10279879c17725295fbd765f94 = $(
+      `<div id="html_34439c10279879c17725295fbd765f94" style="width: 100.0%; height: 100.0%;">         <b>Field ID:</b> NM_FIELD_078<br>         <b>County:</b> Curry<br>         <b>Area:</b> 562.8 acres<br>         <b>Crop:</b> Corn<br>         <b>Years with Corn:</b> 2019         </div>`
+    )[0];
+    popup_32241735e0f24f668b9c30e7b38a7589.setContent(
+      html_34439c10279879c17725295fbd765f94
+    );
+
+    geo_json_0c6d0596c92cccaee6389e2b22eec4ba.bindPopup(
+      popup_32241735e0f24f668b9c30e7b38a7589
+    );
+
+    geo_json_0c6d0596c92cccaee6389e2b22eec4ba.addTo(
+      map_da36c18b3d4fd1acdb8c508d87e3452c
+    );
+
+    function geo_json_8be42224279451e8ea2b50597d67f0bf_styler(feature) {
+      switch (feature.id) {
+        default:
+          return {
+            color: 'darkgoldenrod',
+            fillColor: '#FFD700',
+            fillOpacity: 0.8,
+            weight: 2,
+          };
+      }
+    }
+
+    function geo_json_8be42224279451e8ea2b50597d67f0bf_onEachFeature(
+      feature,
+      layer
+    ) {
+      layer.on({});
+    }
+    var geo_json_8be42224279451e8ea2b50597d67f0bf = L.geoJson(null, {
+      onEachFeature: geo_json_8be42224279451e8ea2b50597d67f0bf_onEachFeature,
+
+      style: geo_json_8be42224279451e8ea2b50597d67f0bf_styler,
+      ...{},
+    });
+
+    function geo_json_8be42224279451e8ea2b50597d67f0bf_add(data) {
+      geo_json_8be42224279451e8ea2b50597d67f0bf.addData(data);
+    }
+    geo_json_8be42224279451e8ea2b50597d67f0bf_add({
+      features: [
+        {
+          geometry: {
+            coordinates: [
+              [
+                [-103.6300901552672, 34.170262094789344],
+                [-103.62839054353452, 34.170262094789344],
+                [-103.62839054353452, 34.17808285844301],
+                [-103.6300901552672, 34.17808285844301],
+                [-103.6300901552672, 34.170262094789344],
+              ],
+            ],
+            type: 'Polygon',
+          },
+          id: '0',
+          type: 'Feature',
+        },
+      ],
+      type: 'FeatureCollection',
+    });
+
+    var popup_924150879e2e8d033ad2de84b9d377b2 = L.popup({
+      maxWidth: 300,
+    });
+
+    var html_b14f1f13798dbb67eb6d1476c13904e7 = $(
+      `<div id="html_b14f1f13798dbb67eb6d1476c13904e7" style="width: 100.0%; height: 100.0%;">         <b>Field ID:</b> NM_FIELD_130<br>         <b>County:</b> Roosevelt<br>         <b>Area:</b> 328.5 acres<br>         <b>Crop:</b> Corn<br>         <b>Years with Corn:</b> 2015         </div>`
+    )[0];
+    popup_924150879e2e8d033ad2de84b9d377b2.setContent(
+      html_b14f1f13798dbb67eb6d1476c13904e7
+    );
+
+    geo_json_8be42224279451e8ea2b50597d67f0bf.bindPopup(
+      popup_924150879e2e8d033ad2de84b9d377b2
+    );
+
+    geo_json_8be42224279451e8ea2b50597d67f0bf.addTo(
+      map_da36c18b3d4fd1acdb8c508d87e3452c
+    );
+
+    function geo_json_9d1d4caec2a0454d62dabb1675c3e8e1_styler(feature) {
+      switch (feature.id) {
+        default:
+          return {
+            color: 'darkgoldenrod',
+            fillColor: '#FFD700',
+            fillOpacity: 0.8,
+            weight: 2,
+          };
+      }
+    }
+
+    function geo_json_9d1d4caec2a0454d62dabb1675c3e8e1_onEachFeature(
+      feature,
+      layer
+    ) {
+      layer.on({});
+    }
+    var geo_json_9d1d4caec2a0454d62dabb1675c3e8e1 = L.geoJson(null, {
+      onEachFeature: geo_json_9d1d4caec2a0454d62dabb1675c3e8e1_onEachFeature,
+
+      style: geo_json_9d1d4caec2a0454d62dabb1675c3e8e1_styler,
+      ...{},
+    });
+
+    function geo_json_9d1d4caec2a0454d62dabb1675c3e8e1_add(data) {
+      geo_json_9d1d4caec2a0454d62dabb1675c3e8e1.addData(data);
+    }
+    geo_json_9d1d4caec2a0454d62dabb1675c3e8e1_add({
+      features: [
+        {
+          geometry: {
+            coordinates: [
+              [
+                [-103.31568444004138, 34.62869124424384],
+                [-103.31422113128012, 34.62869124424384],
+                [-103.31422113128012, 34.6316417694935],
+                [-103.31568444004138, 34.6316417694935],
+                [-103.31568444004138, 34.62869124424384],
+              ],
+            ],
+            type: 'Polygon',
+          },
+          id: '0',
+          type: 'Feature',
+        },
+      ],
+      type: 'FeatureCollection',
+    });
+
+    var popup_c768cbe4497efd1bf4e7739e79a657a7 = L.popup({
+      maxWidth: 300,
+    });
+
+    var html_fd0bdb616a60050efa51039ab8b53667 = $(
+      `<div id="html_fd0bdb616a60050efa51039ab8b53667" style="width: 100.0%; height: 100.0%;">         <b>Field ID:</b> NM_FIELD_188<br>         <b>County:</b> Curry<br>         <b>Area:</b> 106.7 acres<br>         <b>Crop:</b> Corn<br>         <b>Years with Corn:</b> 2011         </div>`
+    )[0];
+    popup_c768cbe4497efd1bf4e7739e79a657a7.setContent(
+      html_fd0bdb616a60050efa51039ab8b53667
+    );
+
+    geo_json_9d1d4caec2a0454d62dabb1675c3e8e1.bindPopup(
+      popup_c768cbe4497efd1bf4e7739e79a657a7
+    );
+
+    geo_json_9d1d4caec2a0454d62dabb1675c3e8e1.addTo(
+      map_da36c18b3d4fd1acdb8c508d87e3452c
+    );
+
+    var marker_cluster_e5e0966f540326fda512a33ef62d91e4 = L.markerClusterGroup(
+      {}
+    );
+
+    var marker_511e270864f4a940fac90ed8ac993f33 = L.marker(
+      [34.04438628726709, -103.36668098500763],
+      {}
+    ).addTo(marker_cluster_e5e0966f540326fda512a33ef62d91e4);
+
+    var icon_b30e3e2c2dc97249ce87fa838a358ac8 = L.AwesomeMarkers.icon({
+      markerColor: 'orange',
+      iconColor: 'white',
+      icon: 'leaf',
+      prefix: 'fa',
+      extraClasses: 'fa-rotate-0',
+    });
+
+    var popup_91ac3a79f55c616503ec1feb3c35744b = L.popup({
+      maxWidth: '100%',
+    });
+
+    var html_770dfb4da4d39d4b981b8f899f1912e2 = $(
+      `<div id="html_770dfb4da4d39d4b981b8f899f1912e2" style="width: 100.0%; height: 100.0%;">NM_FIELD_025 - Roosevelt</div>`
+    )[0];
+    popup_91ac3a79f55c616503ec1feb3c35744b.setContent(
+      html_770dfb4da4d39d4b981b8f899f1912e2
+    );
+
+    marker_511e270864f4a940fac90ed8ac993f33.bindPopup(
+      popup_91ac3a79f55c616503ec1feb3c35744b
+    );
+
+    marker_511e270864f4a940fac90ed8ac993f33.setIcon(
+      icon_b30e3e2c2dc97249ce87fa838a358ac8
+    );
+
+    var marker_d7543d5eec8ab90bf6d9d58c972ce8b1 = L.marker(
+      [33.95513748990933, -103.57557092199559],
+      {}
+    ).addTo(marker_cluster_e5e0966f540326fda512a33ef62d91e4);
+
+    var icon_b2e69480a6b73657d746f543e9b96c04 = L.AwesomeMarkers.icon({
+      markerColor: 'orange',
+      iconColor: 'white',
+      icon: 'leaf',
+      prefix: 'fa',
+      extraClasses: 'fa-rotate-0',
+    });
+
+    var popup_752f7085f5416c4e0c2adc038380d06e = L.popup({
+      maxWidth: '100%',
+    });
+
+    var html_99a222b03659177a9509b4b60daa5ee2 = $(
+      `<div id="html_99a222b03659177a9509b4b60daa5ee2" style="width: 100.0%; height: 100.0%;">NM_FIELD_065 - Roosevelt</div>`
+    )[0];
+    popup_752f7085f5416c4e0c2adc038380d06e.setContent(
+      html_99a222b03659177a9509b4b60daa5ee2
+    );
+
+    marker_d7543d5eec8ab90bf6d9d58c972ce8b1.bindPopup(
+      popup_752f7085f5416c4e0c2adc038380d06e
+    );
+
+    marker_d7543d5eec8ab90bf6d9d58c972ce8b1.setIcon(
+      icon_b2e69480a6b73657d746f543e9b96c04
+    );
+
+    var marker_49f327e7aca24954b52a83e07cf618d9 = L.marker(
+      [34.62437854562883, -103.20238963386379],
+      {}
+    ).addTo(marker_cluster_e5e0966f540326fda512a33ef62d91e4);
+
+    var icon_cb8c546544c598557625dcbf7c8f63f4 = L.AwesomeMarkers.icon({
+      markerColor: 'orange',
+      iconColor: 'white',
+      icon: 'leaf',
+      prefix: 'fa',
+      extraClasses: 'fa-rotate-0',
+    });
+
+    var popup_a3f63dcaebda8a73e2197d82e0455a6b = L.popup({
+      maxWidth: '100%',
+    });
+
+    var html_b874d0c7127fe87a9f5fae0302a084fa = $(
+      `<div id="html_b874d0c7127fe87a9f5fae0302a084fa" style="width: 100.0%; height: 100.0%;">NM_FIELD_078 - Curry</div>`
+    )[0];
+    popup_a3f63dcaebda8a73e2197d82e0455a6b.setContent(
+      html_b874d0c7127fe87a9f5fae0302a084fa
+    );
+
+    marker_49f327e7aca24954b52a83e07cf618d9.bindPopup(
+      popup_a3f63dcaebda8a73e2197d82e0455a6b
+    );
+
+    marker_49f327e7aca24954b52a83e07cf618d9.setIcon(
+      icon_cb8c546544c598557625dcbf7c8f63f4
+    );
+
+    var marker_1071a34b2ea5fa116d0665636450f3b5 = L.marker(
+      [34.17417247661618, -103.62924034940087],
+      {}
+    ).addTo(marker_cluster_e5e0966f540326fda512a33ef62d91e4);
+
+    var icon_c044a188bce14b13634132a51b45a2b0 = L.AwesomeMarkers.icon({
+      markerColor: 'orange',
+      iconColor: 'white',
+      icon: 'leaf',
+      prefix: 'fa',
+      extraClasses: 'fa-rotate-0',
+    });
+
+    var popup_c890f966d83738f6b0a89b1e69a6554c = L.popup({
+      maxWidth: '100%',
+    });
+
+    var html_db7d7ea4eea2b93fae2e2352069f8b92 = $(
+      `<div id="html_db7d7ea4eea2b93fae2e2352069f8b92" style="width: 100.0%; height: 100.0%;">NM_FIELD_130 - Roosevelt</div>`
+    )[0];
+    popup_c890f966d83738f6b0a89b1e69a6554c.setContent(
+      html_db7d7ea4eea2b93fae2e2352069f8b92
+    );
+
+    marker_1071a34b2ea5fa116d0665636450f3b5.bindPopup(
+      popup_c890f966d83738f6b0a89b1e69a6554c
+    );
+
+    marker_1071a34b2ea5fa116d0665636450f3b5.setIcon(
+      icon_c044a188bce14b13634132a51b45a2b0
+    );
+
+    var marker_dd8391a789a5762d6e8bd7643c2da583 = L.marker(
+      [34.63016650686867, -103.31495278566074],
+      {}
+    ).addTo(marker_cluster_e5e0966f540326fda512a33ef62d91e4);
+
+    var icon_52a67f698378ae905b3279cde0a5cfc1 = L.AwesomeMarkers.icon({
+      markerColor: 'orange',
+      iconColor: 'white',
+      icon: 'leaf',
+      prefix: 'fa',
+      extraClasses: 'fa-rotate-0',
+    });
+
+    var popup_e548c1840530de54aef316acf10073e2 = L.popup({
+      maxWidth: '100%',
+    });
+
+    var html_1c83b9ec7d152614b7716c380bef7fcb = $(
+      `<div id="html_1c83b9ec7d152614b7716c380bef7fcb" style="width: 100.0%; height: 100.0%;">NM_FIELD_188 - Curry</div>`
+    )[0];
+    popup_e548c1840530de54aef316acf10073e2.setContent(
+      html_1c83b9ec7d152614b7716c380bef7fcb
+    );
+
+    marker_dd8391a789a5762d6e8bd7643c2da583.bindPopup(
+      popup_e548c1840530de54aef316acf10073e2
+    );
+
+    marker_dd8391a789a5762d6e8bd7643c2da583.setIcon(
+      icon_52a67f698378ae905b3279cde0a5cfc1
+    );
+
+    marker_cluster_e5e0966f540326fda512a33ef62d91e4.addTo(
+      map_da36c18b3d4fd1acdb8c508d87e3452c
+    );
+
+    var layer_control_9e2a0ae60c6b0825fa60d6efdbb93040_layers = {
+      base_layers: {
+        openstreetmap: tile_layer_6979005b98e21b44be89377d7a612cc8,
+        Satellite: tile_layer_bac07102549711c88a671b1c8b12cf8d,
+      },
+      overlays: {
+        macro_element_58c361b041d39909db2ec2693548ebb5:
+          geo_json_58c361b041d39909db2ec2693548ebb5,
+        macro_element_6a8722cb974d8e2f7cf8869c0a6f2e80:
+          geo_json_6a8722cb974d8e2f7cf8869c0a6f2e80,
+        macro_element_0c6d0596c92cccaee6389e2b22eec4ba:
+          geo_json_0c6d0596c92cccaee6389e2b22eec4ba,
+        macro_element_8be42224279451e8ea2b50597d67f0bf:
+          geo_json_8be42224279451e8ea2b50597d67f0bf,
+        macro_element_9d1d4caec2a0454d62dabb1675c3e8e1:
+          geo_json_9d1d4caec2a0454d62dabb1675c3e8e1,
+        'Corn Fields': marker_cluster_e5e0966f540326fda512a33ef62d91e4,
+      },
+    };
+    let layer_control_9e2a0ae60c6b0825fa60d6efdbb93040 = L.control
+      .layers(
+        layer_control_9e2a0ae60c6b0825fa60d6efdbb93040_layers.base_layers,
+        layer_control_9e2a0ae60c6b0825fa60d6efdbb93040_layers.overlays,
+        {
+          position: 'topright',
+          collapsed: true,
+          autoZIndex: true,
+        }
+      )
+      .addTo(map_da36c18b3d4fd1acdb8c508d87e3452c);
+  </script>
+</html>

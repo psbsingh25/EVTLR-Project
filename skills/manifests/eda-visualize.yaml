@@ -1,0 +1,19 @@
+name: eda-visualize
+version: 1.0.0
+author: Boreal Bytes
+description:
+  Create professional data visualizations using pandas, matplotlib, and seaborn.
+  Generate histograms, scatter plots, box plots, bar charts, and heatmaps for
+  agricultural data analysis.
+license: MIT
+source: skills/vendor/ag-skills/eda-visualize/
+entry: skills.vendor.ag-skills.eda-visualize
+category: eda
+tags:
+  - visualization
+  - plotting
+  - matplotlib
+  - seaborn
+  - pandas
+imported_at: '2026-03-04T04:07:10.876486Z'
+original_repo: https://github.com/borealBytes/ag-skills/tree/skills-content
