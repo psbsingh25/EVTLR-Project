@@ -1,0 +1,19 @@
+name: eda-time-series
+version: 1.0.0
+author: Boreal Bytes
+description: Analyze time-based agricultural data to identify trends, seasonality,
+  and patterns over time. Create time series plots, calculate rolling averages, detect
+  anomalies, and forecast future values.
+license: MIT
+source: skills/vendor/ag-skills/eda-time-series/
+entry: skills.vendor.ag-skills.eda-time-series
+category: eda
+tags:
+- eda
+- time-series
+- pandas
+- matplotlib
+- agriculture
+- forecasting
+imported_at: '2026-03-04T04:07:10.873938Z'
+original_repo: https://github.com/borealBytes/ag-skills/tree/skills-content

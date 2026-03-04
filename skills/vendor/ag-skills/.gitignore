@@ -1,145 +1,76 @@
-# Byte-compiled / optimized / DLL files
+# Agricultural Data Skills - Gitignore
+# 
+# This file ensures generated data outputs are not committed to git.
+# Only examples/ directory should be committed (small sample data).
+
+# Data outputs - never commit
+data/
+*.geojson
+*.tif
+*.tiff
+*.nc
+*.csv
+*.txt
+*.xlsx
+*.parquet
+*.shp
+*.shx
+*.dbf
+*.prj
+*.sbn
+*.sbx
+*.xml
+
+# Plot outputs
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.svg
+*.html
+
+# Jupyter notebooks (unless specifically wanted)
+*.ipynb
+.ipynb_checkpoints/
+
+# Python cache
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
 
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# PEP 582
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
+# Virtual environments
 venv/
+env/
 ENV/
-env.bak/
-venv.bak/
+.venv/
 
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# IDEs
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
 
-# Data files (except samples)
-data/*
-!data/samples/
-!data/samples/.gitkeep
+# Logs
+*.log
 
-# Model files
-*.pkl
-*.joblib
-*.h5
-*.onnx
+# Large binary files
+*.zip
+*.tar
+*.gz
+*.rar
+
+# Keep examples (explicit allow)
+!examples/*
+!examples/**/*
+!*/examples/*
+!*/examples/**/*
+
+# Keep data/README.md files (documentation only)
+!data/README.md

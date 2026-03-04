@@ -1,0 +1,21 @@
+name: nasa-power-weather
+version: 1.0.0
+author: Boreal Bytes
+description: Download NASA POWER daily weather data for agricultural field locations.
+  Queries the free REST API for temperature, precipitation, solar radiation, humidity,
+  and wind. Calculates Growing Degree Days (GDD). Use when the user needs historical
+  weather for crop modeling, irrigation planning, or climate analysis.
+license: MIT
+source: skills/vendor/ag-skills/nasa-power-weather/
+entry: skills.vendor.ag-skills.nasa-power-weather
+category: data-download
+tags:
+- nasa
+- power
+- weather
+- climate
+- agriculture
+- api
+- gdd
+imported_at: '2026-03-04T04:07:10.890594Z'
+original_repo: https://github.com/borealBytes/ag-skills/tree/skills-content
