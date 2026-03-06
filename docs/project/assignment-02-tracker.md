@@ -280,13 +280,16 @@ _Status: ✅ Complete and ready for submission_
   - `Developed/Medium Intensity`
 - [x] Exported all dashboard plots as high-resolution PNG assets to `output/dashboard_assets/`
 - [x] Built standalone dashboard HTML at `output/field_eda_dashboard.html`
+- [x] Added portable single-file dashboard at `output/field_eda_dashboard_embedded.html`
 - [x] Added interpretation text for each chart in the notebook
+- [x] Added helper script `scripts/embed_dashboard_assets.py` to regenerate embedded dashboard output
 
 ### 📁 Dashboard Deliverables
 
 ```
 output/
 ├── field_eda_dashboard.html
+├── field_eda_dashboard_embedded.html
 └── dashboard_assets/
     ├── 01_crop_total_estimated_area_2010.png
     ├── 02_crop_total_estimated_area_2020.png
@@ -296,6 +299,12 @@ output/
     ├── 06_soil_type_vs_crop_type_2020.png
     ├── 07_soil_organic_matter_vs_crop_type_2010.png
     └── 08_soil_organic_matter_vs_crop_type_2020.png
+```
+
+Embedded dashboard regeneration command:
+
+```bash
+python scripts/embed_dashboard_assets.py
 ```
 
 ### 🔢 Visualization Sequence Implemented
