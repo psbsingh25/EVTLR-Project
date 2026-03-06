@@ -1,21 +1,22 @@
 name: landsat-imagery
 version: 1.0.0
 author: Boreal Bytes
-description: Search, download, and process Landsat 8/9 satellite imagery for agricultural
-  fields. Use when the user needs to acquire Landsat scenes, calculate vegetation
-  indices (NDVI/EVI), or perform long-term remote sensing analysis using standard
-  Python libraries (landsatxplore, rasterio).
+description:
+  Search, download, and process Landsat 8/9 satellite imagery for agricultural
+  fields. Use when the user needs to acquire Landsat scenes, calculate
+  vegetation indices (NDVI/EVI), or perform long-term remote sensing analysis
+  using standard Python libraries (landsatxplore, rasterio).
 license: MIT
 source: skills/vendor/ag-skills/landsat-imagery/
 entry: skills.vendor.ag-skills.landsat-imagery
 category: data-download
 tags:
-- landsat
-- usgs
-- satellite
-- ndvi
-- rasterio
-- remote-sensing
-- geospatial
+  - landsat
+  - usgs
+  - satellite
+  - ndvi
+  - rasterio
+  - remote-sensing
+  - geospatial
 imported_at: '2026-03-04T04:07:10.887481Z'
 original_repo: https://github.com/borealBytes/ag-skills/tree/skills-content

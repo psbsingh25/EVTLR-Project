@@ -1,18 +1,19 @@
 name: eda-compare
 version: 1.0.0
 author: Boreal Bytes
-description: Compare groups and categories in agricultural datasets using pandas and
-  scipy. Perform statistical tests, create comparative visualizations, and identify
+description:
+  Compare groups and categories in agricultural datasets using pandas and scipy.
+  Perform statistical tests, create comparative visualizations, and identify
   significant differences between groups.
 license: MIT
 source: skills/vendor/ag-skills/eda-compare/
 entry: skills.vendor.ag-skills.eda-compare
 category: eda
 tags:
-- comparison
-- statistics
-- groups
-- pandas
-- scipy
+  - comparison
+  - statistics
+  - groups
+  - pandas
+  - scipy
 imported_at: '2026-03-04T04:07:10.865846Z'
 original_repo: https://github.com/borealBytes/ag-skills/tree/skills-content
