@@ -43,11 +43,12 @@ data/
 - [x] Saved to `data/boundaries/nm_top_200_fields.geojson`
 
 **Target Counties:**
-| County | FIPS Code | Fields |
-|--------|-----------|--------|
-| Lea | 35025 | ~85 |
-| Roosevelt | 35041 | ~69 |
-| Curry | 35009 | ~45 |
+
+| County    | FIPS Code | Fields |
+| --------- | --------- | ------ |
+| Lea       | 35025     | ~85    |
+| Roosevelt | 35041     | ~69    |
+| Curry     | 35009     | ~45    |
 
 ### 3. Soil Data Download (SSURGO)
 
@@ -111,12 +112,13 @@ data/
 - [x] Started HTTP server (port 8000) for viewing
 
 **Maps Created:**
-| Map | File | Description |
-|-----|------|-------------|
-| All Fields | `my_fields_map.html` | 199 fields by crop type |
-| Corn Fields | `my_fields_corn_map.html` | 5 corn fields highlighted |
-| All + Soil | `my_fields_map_with_soil.html` | With soil properties |
-| Corn + Soil | `my_fields_corn_map_with_soil.html` | Corn fields + soil data |
+
+| Map         | File                                | Description               |
+| ----------- | ----------------------------------- | ------------------------- |
+| All Fields  | `my_fields_map.html`                | 199 fields by crop type   |
+| Corn Fields | `my_fields_corn_map.html`           | 5 corn fields highlighted |
+| All + Soil  | `my_fields_map_with_soil.html`      | With soil properties      |
+| Corn + Soil | `my_fields_corn_map_with_soil.html` | Corn fields + soil data   |
 
 ### 8. Scripts Development
 
@@ -258,3 +260,53 @@ data/assignment-02/
 
 _Last updated: 2026-03-04_
 _Status: ✅ Complete and ready for submission_
+
+---
+
+## 📈 Assignment 03 EDA Dashboard Update (2026-03-06)
+
+### ✅ Completed Dashboard Enhancements
+
+- [x] Upgraded `Soil Type vs Crop Type` charts to year-specific professional heatmaps (2010 and 2020)
+- [x] Upgraded `Soil Organic Matter vs Crop Type` charts to year-specific professional boxplots (2010 and 2020)
+- [x] Added two additional required visuals:
+  - Top crops by estimated acreage (2010)
+  - Top crops by estimated acreage (2020)
+  - Soil organic matter distribution by field count (2010)
+  - Soil organic matter distribution by field count (2020)
+- [x] Applied category exclusions to all dashboard plots:
+  - `Other Hay/Non Alfalfa`
+  - `Code_236` (`crop_code = 236`)
+  - `Developed/Medium Intensity`
+- [x] Exported all dashboard plots as high-resolution PNG assets to `output/dashboard_assets/`
+- [x] Built standalone dashboard HTML at `output/field_eda_dashboard.html`
+- [x] Added interpretation text for each chart in the notebook
+
+### 📁 Dashboard Deliverables
+
+```
+output/
+├── field_eda_dashboard.html
+└── dashboard_assets/
+    ├── 01_crop_total_estimated_area_2010.png
+    ├── 02_crop_total_estimated_area_2020.png
+    ├── 03_soil_organic_matter_distribution_2010.png
+    ├── 04_soil_organic_matter_distribution_2020.png
+    ├── 05_soil_type_vs_crop_type_2010.png
+    ├── 06_soil_type_vs_crop_type_2020.png
+    ├── 07_soil_organic_matter_vs_crop_type_2010.png
+    └── 08_soil_organic_matter_vs_crop_type_2020.png
+```
+
+### 🔢 Visualization Sequence Implemented
+
+1. Crop total estimated area (2010)
+2. Crop total estimated area (2020)
+3. Soil organic matter distribution vs field count (2010)
+4. Soil organic matter distribution vs field count (2020)
+5. Soil type vs crop type (2010)
+6. Soil type vs crop type (2020)
+7. Soil organic matter vs crop type (2010)
+8. Soil organic matter vs crop type (2020)
+
+_Last updated: 2026-03-06_

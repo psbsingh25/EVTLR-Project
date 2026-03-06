@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>Assignment 03 EDA Dashboard</title>
+  <style>
+    :root {
+      --bg: #f5f7f2;
+      --panel: #ffffff;
+      --ink: #1f2a2e;
+      --muted: #56646b;
+      --accent: #1f7a8c;
+      --line: #dbe3dd;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--ink); }
+    .wrap { max-width: 1300px; margin: 0 auto; padding: 28px 18px 40px; }
+    header { background: linear-gradient(140deg, #145a69, #2c9a78); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 20px; }
+    header h1 { margin: 0 0 8px 0; font-size: 1.95rem; }
+    header p { margin: 4px 0; max-width: 900px; line-height: 1.45; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); }
+    .card h2 { margin: 0 0 8px 0; font-size: 1.06rem; }
+    .card p { margin: 0 0 10px 0; color: var(--muted); font-size: 0.94rem; line-height: 1.4; }
+    .card img { width: 100%; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
+    footer { margin-top: 22px; color: var(--muted); font-size: 0.88rem; }
+    @media (max-width: 720px) {
+      header h1 { font-size: 1.45rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class='wrap'>
+    <header>
+      <h1>Assignment 03 - Field EDA Dashboard</h1>
+      <p>Year-specific agronomic visual analysis for 2010 and 2020 using field-level crop and soil records.</p>
+      <p>Filters applied: removed <strong>Other Hay/Non Alfalfa</strong>, <strong>Code_236</strong>, and <strong>Developed/Medium Intensity</strong>.</p>
+    </header>
+    <main class='grid'>
+      
+    <section class='card'>
+      <h2>1) Crop Total Estimated Area - 2010</h2>
+      <p>Estimated acreage by crop class for 2010 after exclusion filtering.</p>
+      <img src='dashboard_assets/01_crop_total_estimated_area_2010.png' alt='1) Crop Total Estimated Area - 2010' loading='lazy' />
+    </section>
+    
+    <section class='card'>
+      <h2>2) Crop Total Estimated Area - 2020</h2>
+      <p>Estimated acreage by crop class for 2020 after exclusion filtering.</p>
+      <img src='dashboard_assets/02_crop_total_estimated_area_2020.png' alt='2) Crop Total Estimated Area - 2020' loading='lazy' />
+    </section>
+    
+    <section class='card'>
+      <h2>3) Soil Organic Matter Distribution - 2010</h2>
+      <p>Field-level OM distribution among 2010 field records.</p>
+      <img src='dashboard_assets/03_soil_organic_matter_distribution_2010.png' alt='3) Soil Organic Matter Distribution - 2010' loading='lazy' />
+    </section>
+    
+    <section class='card'>
+      <h2>4) Soil Organic Matter Distribution - 2020</h2>
+      <p>Field-level OM distribution among 2020 field records.</p>
+      <img src='dashboard_assets/04_soil_organic_matter_distribution_2020.png' alt='4) Soil Organic Matter Distribution - 2020' loading='lazy' />
+    </section>
+    
+    <section class='card'>
+      <h2>5) Soil Type vs Crop Type - 2010</h2>
+      <p>Count heatmap of soil-crop combinations in 2010.</p>
+      <img src='dashboard_assets/05_soil_type_vs_crop_type_2010.png' alt='5) Soil Type vs Crop Type - 2010' loading='lazy' />
+    </section>
+    
+    <section class='card'>
+      <h2>6) Soil Type vs Crop Type - 2020</h2>
+      <p>Count heatmap of soil-crop combinations in 2020.</p>
+      <img src='dashboard_assets/06_soil_type_vs_crop_type_2020.png' alt='6) Soil Type vs Crop Type - 2020' loading='lazy' />
+    </section>
+    
+    <section class='card'>
+      <h2>7) Soil Organic Matter vs Crop Type - 2010</h2>
+      <p>OM boxplots by crop class with sample-size context.</p>
+      <img src='dashboard_assets/07_soil_organic_matter_vs_crop_type_2010.png' alt='7) Soil Organic Matter vs Crop Type - 2010' loading='lazy' />
+    </section>
+    
+    <section class='card'>
+      <h2>8) Soil Organic Matter vs Crop Type - 2020</h2>
+      <p>OM boxplots by crop class with sample-size context.</p>
+      <img src='dashboard_assets/08_soil_organic_matter_vs_crop_type_2020.png' alt='8) Soil Organic Matter vs Crop Type - 2020' loading='lazy' />
+    </section>
+    
+    </main>
+    <footer>Generated from notebook: notebooks/03_field_eda/assignment-03-eda.ipynb</footer>
+  </div>
+</body>
+</html>
