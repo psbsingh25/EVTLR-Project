@@ -278,8 +278,15 @@ _Status: ✅ Complete and ready for submission_
   - `Other Hay/Non Alfalfa`
   - `Code_236` (`crop_code = 236`)
   - `Developed/Medium Intensity`
+  - `Developed/Low Intensity`
+  - `Open Water`
 - [x] Exported all dashboard plots as high-resolution PNG assets to `output/dashboard_assets/`
+- [x] Updated all chart exports to `800 DPI` for higher image clarity
+- [x] Applied black + bold styling to axis labels, tick labels, plot titles, and legends/colorbar labels
 - [x] Built standalone dashboard HTML at `output/field_eda_dashboard.html`
+- [x] Rearranged dashboard into paired two-column layout (2010 vs 2020)
+- [x] Added chart click-to-expand modal interaction for focused viewing
+- [x] Added short two-sentence trend interpretation summary to dashboard header section
 - [x] Added portable single-file dashboard at `output/field_eda_dashboard_embedded.html`
 - [x] Added interpretation text for each chart in the notebook
 - [x] Added helper script `scripts/embed_dashboard_assets.py` to regenerate embedded dashboard output
