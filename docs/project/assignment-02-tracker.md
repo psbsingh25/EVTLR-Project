@@ -326,3 +326,40 @@ python scripts/embed_dashboard_assets.py
 8. Soil organic matter vs crop type (2020)
 
 _Last updated: 2026-03-06_
+
+---
+
+## 🗺️ Assignment 04 Mapping Update (2026-03-13)
+
+### ✅ Completed Mapping Work
+
+- [x] Created branch `Assignment-04-mapping`
+- [x] Added notebook `notebooks/04_field_mapping/_fied_mapping.ipynb`
+- [x] Loaded field boundaries from `data/boundaries/nm_top_200_fields.geojson`
+- [x] Loaded NRCS soil data from `data/soil/nm_soil_data.csv`
+- [x] Built dominant-soil spatial overlay by joining soil attributes to fields using `field_id`
+- [x] Verified CRS alignment between boundary and overlay layers and included `.to_crs()` handling for mismatches
+- [x] Created integrated map with field boundaries as base and dominant soil types as overlay
+- [x] Added cartographic elements: legend, north arrow, and county labels
+- [x] Exported final dashboard asset to `output/dashboard_assets/field_spatial_map.png`
+- [x] Added the new map into the dashboard view at `output/field_eda_dashboard.html`
+- [x] Added notebook markdown section titled `Interpretation` with a 3-5 sentence explanation
+- [x] Added dashboard-visible interpretation paragraph under the integrated field spatial map card
+- [x] Expanded integrated map card to full dashboard width for improved readability
+- [x] Enhanced map rendering with explicit county boundary outlines
+- [x] Updated interpretation to include only total field counts for the two most abundant soil types (Kimbrough and Amarillo)
+- [x] Corrected dashboard layout so only the integrated spatial map card renders in full-width mode
+- [x] Added satellite basemap and explicit AOI county highlighting for Lea, Roosevelt, and Curry
+- [x] Repositioned north arrow below legend and removed per-field ID lists from interpretation text
+- [x] Increased county boundary stroke weight and expanded surrounding map extent to better fill full-width dashboard layout
+- [x] Added surrounding New Mexico counties and neighboring Texas counties to broaden map context and fill dashboard width
+
+### 📁 Assignment 04 Deliverables
+
+```
+notebooks/04_field_mapping/_fied_mapping.ipynb
+output/dashboard_assets/field_spatial_map.png
+output/field_eda_dashboard.html
+```
+
+_Last updated: 2026-03-13_
