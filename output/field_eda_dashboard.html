@@ -299,6 +299,34 @@
 
         <section class="row-block map-full-width">
           <div class="row-head">
+            <h2>Winter Wheat Weather Trends (2015-2020)</h2>
+            <p>
+              Smoothed 15-day high temperature and precipitation for selected
+              Winter Wheat fields in Lea, Roosevelt, and Curry counties.
+            </p>
+          </div>
+          <div class="two-col">
+            <article class="card">
+              <h3>Smoothed Weather Trends + Abnormal Heat Highlights</h3>
+              <img
+                class="clickable-plot map-plot"
+                src="dashboard_assets/weather_trends.png"
+                alt="Winter Wheat smoothed weather trends and abnormal heat highlights"
+                loading="lazy"
+              />
+            </article>
+          </div>
+          <p style="margin-top: 10px; color: #1f2937; line-height: 1.45">
+            This panel summarizes September-to-June seasons from 2015-09 through
+            2020-06. Red markers indicate days where daily maximum temperature
+            exceeded 105F. A companion raw daily chart is also exported to
+            <code>output/dashboard_assets/weather_trends_raw.png</code> for
+            day-level inspection.
+          </p>
+        </section>
+
+        <section class="row-block map-full-width">
+          <div class="row-head">
             <h2>Integrated Field Spatial Map</h2>
             <p>
               Satellite basemap with dominant NRCS soil overlay and tighter

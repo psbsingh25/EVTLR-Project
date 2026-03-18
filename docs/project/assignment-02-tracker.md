@@ -363,3 +363,40 @@ output/field_eda_dashboard.html
 ```
 
 _Last updated: 2026-03-13_
+
+---
+
+## 🌦️ Assignment 06 Weather Analysis Update (2026-03-18)
+
+### ✅ Completed Weather Analysis Work
+
+- [x] Created branch `assignment-06-weather`
+- [x] Added notebook `notebooks/06_weather_analysis/06_weather_analysis.ipynb`
+- [x] Loaded weather dataset from `data/weather/nm_weather_2005_2020.csv` with explicit datetime parsing for `date`
+- [x] Joined county metadata from `data/boundaries/nm_top_200_fields.geojson` and Winter Wheat labels from `data/crops/nm_cdl_2008_2020.csv`
+- [x] Selected top Winter Wheat fields per county (up to 3 per county by Winter Wheat year frequency)
+- [x] Filtered weather records to September through June seasons across 2015-09-01 to 2020-06-30
+- [x] Built raw daily weather visualization for temperature highs and precipitation by county/field
+- [x] Built 15-day rolling-average weather visualization with abnormal heat-day highlighting (>105F)
+- [x] Created abnormal-day table and exported to `output/dashboard_assets/weather_abnormal_days.csv`
+- [x] Exported weather figures to dashboard assets:
+  - `output/dashboard_assets/weather_trends_raw.png`
+  - `output/dashboard_assets/weather_trends.png`
+- [x] Added weather chart panel to dashboard HTML at `output/field_eda_dashboard.html`
+
+### 📁 Assignment 06 Deliverables
+
+```
+notebooks/06_weather_analysis/06_weather_analysis.ipynb
+output/dashboard_assets/weather_trends_raw.png
+output/dashboard_assets/weather_trends.png
+output/dashboard_assets/weather_abnormal_days.csv
+output/field_eda_dashboard.html
+```
+
+### 🧾 Notes
+
+- Available weather source data currently spans 2005-2020; analysis uses the available range.
+- Winter Wheat field availability is uneven by county; Lea county currently has one qualifying Winter Wheat field in the source crop labels.
+
+_Last updated: 2026-03-18_
