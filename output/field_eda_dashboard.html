@@ -327,34 +327,31 @@
 
         <section class="row-block map-full-width">
           <div class="row-head">
-            <h2>Integrated Field Spatial Map</h2>
+            <h2>Curry Wheat Field Spatial Maps</h2>
             <p>
-              Satellite basemap with dominant NRCS soil overlay and tighter
-              AOI-focused county framing.
+              One combined image with three zoomed Curry field panels, NDVI
+              underlay, and mean NDVI labels below each panel.
             </p>
           </div>
           <div class="two-col">
             <article class="card">
-              <h3>Field + Soil Overlay</h3>
+              <h3>Curry Combined Panel</h3>
               <img
                 class="clickable-plot map-plot"
-                src="dashboard_assets/field_spatial_map.png"
-                alt="Integrated Field Spatial Map - Dominant Soil Type"
+                src="dashboard_assets/integrated_spatial_analysis_curry_combined.png"
+                alt="Combined map of Curry fields with NDVI overlays"
                 loading="lazy"
               />
             </article>
           </div>
           <p style="margin-top: 10px; color: #1f2937; line-height: 1.45">
-            This map overlays dominant NRCS soil types on the three-county area
-            of interest with a tighter extent centered on Lea, Roosevelt, and
-            Curry. The two most abundant dominant soil types are Kimbrough with
-            33 fields and Amarillo with 20 fields. Field boundaries and
-            dominant-soil polygons are maintained in WGS84 (EPSG:4326), county
-            boundaries are sourced in NAD83 (EPSG:4269), and all layers are
-            reprojected to Web Mercator (EPSG:3857) for aligned plotting with
-            the satellite basemap. Bold AOI county outlines keep focus on
-            project counties while preserving nearby county geometry for
-            orientation.
+            The combined view uses Assignment 05 NDVI (2020-03-07) and includes
+            three zoomed Curry field panels. Border colors vary by soil type.
+            Mean NDVI is shown directly under each panel without field ID text.
+            `NM_FIELD_188` uses NDVI class breaks at 0.32, 0.33, 0.34, 0.35,
+            0.36, and 0.37. CRS checks confirm the source layers start in mixed
+            CRS (fields/soil: EPSG:4326, counties: EPSG:4269, NDVI: EPSG:32613),
+            then vectors are reprojected to EPSG:32613 before analysis.
           </p>
         </section>
       </main>
