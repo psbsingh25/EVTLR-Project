@@ -15,8 +15,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import rasterio
-from matplotlib.colors import BoundaryNorm, ListedColormap
 from matplotlib import font_manager
+from matplotlib.colors import BoundaryNorm, ListedColormap
 from matplotlib.lines import Line2D
 from rasterio.mask import mask
 from rasterio.plot import show
@@ -41,7 +41,9 @@ def load_inputs(root: Path) -> tuple[gpd.GeoDataFrame, gpd.GeoDataFrame, gpd.Geo
     return fields, soil, counties, ndvi_path
 
 
-def check_crs(fields: gpd.GeoDataFrame, soil: gpd.GeoDataFrame, counties: gpd.GeoDataFrame, ndvi_path: Path) -> dict:
+def check_crs(
+    fields: gpd.GeoDataFrame, soil: gpd.GeoDataFrame, counties: gpd.GeoDataFrame, ndvi_path: Path
+) -> dict:
     with rasterio.open(ndvi_path) as src:
         ndvi_crs = str(src.crs)
 
@@ -50,7 +52,10 @@ def check_crs(fields: gpd.GeoDataFrame, soil: gpd.GeoDataFrame, counties: gpd.Ge
         "soil_crs": str(soil.crs),
         "counties_crs": str(counties.crs),
         "ndvi_crs": ndvi_crs,
-        "all_same_before_reproject": str(fields.crs) == str(soil.crs) == str(counties.crs) == ndvi_crs,
+        "all_same_before_reproject": str(fields.crs)
+        == str(soil.crs)
+        == str(counties.crs)
+        == ndvi_crs,
     }
     return checks
 
@@ -100,7 +105,9 @@ def spatial_join_soil(fields_utm: gpd.GeoDataFrame, soil_utm: gpd.GeoDataFrame) 
         if len(exact) > 0:
             joined = exact
 
-    joined = joined.sort_values(["field_id_field", "index_soil"]).drop_duplicates("field_id_field", keep="first")
+    joined = joined.sort_values(["field_id_field", "index_soil"]).drop_duplicates(
+        "field_id_field", keep="first"
+    )
 
     rename_map = {
         "field_id_field": "field_id",
@@ -284,7 +291,9 @@ def create_combined_curry_map(map_info: list[dict], out_png: Path) -> Path:
     return out_png
 
 
-def update_run_metadata(metadata_path: Path, crs_checks: dict, curry_field_maps: list[dict], outputs: dict) -> None:
+def update_run_metadata(
+    metadata_path: Path, crs_checks: dict, curry_field_maps: list[dict], outputs: dict
+) -> None:
     payload = {
         "assignment": "assignment-07-zonal-stats",
         "analysis_date": "2026-03-23",
@@ -319,11 +328,15 @@ def main() -> None:
 
     asset_dir = root / "output" / "dashboard_assets"
     curry_fields = joined_utm[joined_utm["county"] == "Curry"].copy()
-    curry_fields = curry_fields.sort_values(["years_as_winter_wheat", "field_id"], ascending=[False, True])
+    curry_fields = curry_fields.sort_values(
+        ["years_as_winter_wheat", "field_id"], ascending=[False, True]
+    )
 
     unique_soils = [s for s in curry_fields["soil_name"].fillna("Unknown").unique()]
     soil_palette = ["#2563eb", "#16a34a", "#dc2626", "#7c3aed", "#ea580c"]
-    soil_colors = {soil: soil_palette[i % len(soil_palette)] for i, soil in enumerate(sorted(unique_soils))}
+    soil_colors = {
+        soil: soil_palette[i % len(soil_palette)] for i, soil in enumerate(sorted(unique_soils))
+    }
 
     map_info: list[dict] = []
     for row in curry_fields.itertuples():
@@ -338,7 +351,9 @@ def main() -> None:
         )
         map_info.append(info)
 
-    combined_png = create_combined_curry_map(map_info, asset_dir / "integrated_spatial_analysis_curry_combined.png")
+    combined_png = create_combined_curry_map(
+        map_info, asset_dir / "integrated_spatial_analysis_curry_combined.png"
+    )
 
     metadata_path = data_out_dir / "assignment_07_run_metadata.json"
     update_run_metadata(

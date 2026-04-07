@@ -9,10 +9,11 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 ASSETS_DIR = REPO_ROOT / "output" / "dashboard_assets"
-NDVI_STATS_PATH = REPO_ROOT / "data" / "imagery" / "assignment-07" / "fields_with_mean_ndvi_soil.csv"
+NDVI_STATS_PATH = (
+    REPO_ROOT / "data" / "imagery" / "assignment-07" / "fields_with_mean_ndvi_soil.csv"
+)
 NDVI_SUMMARY_FALLBACK_PATH = ASSETS_DIR / "curry_ndvi_summary.csv"
 
 

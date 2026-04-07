@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Merge field boundaries with CDL crop data."""
 
+from pathlib import Path
+
 import geopandas as gpd
 import pandas as pd
-from pathlib import Path
 
 # Load field boundaries
 print("Loading field boundaries...")
@@ -19,28 +20,26 @@ print(f"Loaded {len(cdl_df)} CDL records")
 print("Calculating dominant crop per field...")
 
 # Find the observation with highest dominant_pct for each field
-dominant_idx = cdl_df.groupby('field_id')['dominant_pct'].idxmax()
+dominant_idx = cdl_df.groupby("field_id")["dominant_pct"].idxmax()
 dominant_crops = cdl_df.loc[dominant_idx].copy()
 
 # Rename columns for clarity
-dominant_crops = dominant_crops.rename(columns={
-    'crop_name': 'dominant_crop'
-})
+dominant_crops = dominant_crops.rename(columns={"crop_name": "dominant_crop"})
 
 # Select only needed columns
-dominant_crops = dominant_crops[['field_id', 'dominant_crop', 'crop_code', 'dominant_pct']]
+dominant_crops = dominant_crops[["field_id", "dominant_crop", "crop_code", "dominant_pct"]]
 
 # Merge with field boundaries
 print("Merging data...")
-merged = fields_gdf.merge(dominant_crops, on='field_id', how='left')
+merged = fields_gdf.merge(dominant_crops, on="field_id", how="left")
 
 # Fill NaN for fields with no crop data
-merged['dominant_crop'] = merged['dominant_crop'].fillna('Unknown')
-merged['crop_code'] = merged['crop_code'].fillna(-1).astype(int)
+merged["dominant_crop"] = merged["dominant_crop"].fillna("Unknown")
+merged["crop_code"] = merged["crop_code"].fillna(-1).astype(int)
 
 print(f"Merged data: {len(merged)} fields")
 print("\nCrop distribution:")
-print(merged['dominant_crop'].value_counts())
+print(merged["dominant_crop"].value_counts())
 
 # Create output directory
 output_dir = Path("data/assignment-02")
@@ -53,4 +52,4 @@ print(f"\n✓ Saved: {output_path}")
 
 # Show sample
 print("\nSample data:")
-print(merged[['field_id', 'county', 'area_acres', 'dominant_crop']].head(10))
+print(merged[["field_id", "county", "area_acres", "dominant_crop"]].head(10))

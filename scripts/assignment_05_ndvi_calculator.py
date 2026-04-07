@@ -26,7 +26,6 @@ from rasterio.mask import mask
 from rasterio.merge import merge
 from shapely.geometry import shape
 
-
 STAC_SEARCH_URL = "https://planetarycomputer.microsoft.com/api/stac/v1/search"
 STAC_SIGN_URL = "https://planetarycomputer.microsoft.com/api/sas/v1/sign"
 
@@ -89,7 +88,9 @@ def select_top_wheat_fields(cfg: Config) -> gpd.GeoDataFrame:
 
     selected_fields = fields[fields["field_id"].isin(selected_ids)].copy()
     selected_fields = selected_fields.merge(selected, on=["county", "field_id"], how="left")
-    selected_fields = selected_fields.sort_values(["county", "years_as_winter_wheat", "field_id"], ascending=[True, False, True])
+    selected_fields = selected_fields.sort_values(
+        ["county", "years_as_winter_wheat", "field_id"], ascending=[True, False, True]
+    )
 
     return selected_fields
 
@@ -121,7 +122,9 @@ def sign_asset_href(href: str) -> str:
     return response.json()["href"]
 
 
-def choose_best_single_day(items: list[dict], selected_fields: gpd.GeoDataFrame) -> tuple[str, list[dict], dict]:
+def choose_best_single_day(
+    items: list[dict], selected_fields: gpd.GeoDataFrame
+) -> tuple[str, list[dict], dict]:
     field_geoms = {row.field_id: row.geometry for row in selected_fields.itertuples()}
 
     by_date: dict[str, list[dict]] = {}
@@ -157,7 +160,9 @@ def choose_best_single_day(items: list[dict], selected_fields: gpd.GeoDataFrame)
     return best["date"], by_date[best["date"]], best
 
 
-def clip_remote_asset(item: dict, asset_key: str, out_path: Path, clip_geom, dst_crs: str = "EPSG:4326") -> Path:
+def clip_remote_asset(
+    item: dict, asset_key: str, out_path: Path, clip_geom, dst_crs: str = "EPSG:4326"
+) -> Path:
     href = sign_asset_href(item["assets"][asset_key]["href"])
 
     with rasterio.open(href) as src:
@@ -186,7 +191,9 @@ def clip_remote_asset(item: dict, asset_key: str, out_path: Path, clip_geom, dst
     return out_path
 
 
-def build_clipped_mosaic(input_paths: list[Path], clip_geom, out_path: Path, nodata_value: float) -> Path:
+def build_clipped_mosaic(
+    input_paths: list[Path], clip_geom, out_path: Path, nodata_value: float
+) -> Path:
     srcs = [rasterio.open(str(p)) for p in input_paths]
     try:
         mosaic, transform = merge(srcs)
@@ -211,7 +218,9 @@ def build_clipped_mosaic(input_paths: list[Path], clip_geom, out_path: Path, nod
 
         with rasterio.open(temp_path) as src:
             clip_series = gpd.GeoSeries([clip_geom], crs="EPSG:4326").to_crs(src.crs)
-            clipped, clipped_transform = mask(src, [clip_series.iloc[0]], crop=True, nodata=nodata_value)
+            clipped, clipped_transform = mask(
+                src, [clip_series.iloc[0]], crop=True, nodata=nodata_value
+            )
             clipped_meta = src.meta.copy()
             clipped_meta.update(
                 {
@@ -257,7 +266,9 @@ def compute_ndvi(red_path: Path, nir_path: Path, ndvi_path: Path) -> Path:
     return ndvi_path
 
 
-def export_per_field_ndvi(ndvi_path: Path, selected_fields: gpd.GeoDataFrame, output_dir: Path, date_key: str) -> list[Path]:
+def export_per_field_ndvi(
+    ndvi_path: Path, selected_fields: gpd.GeoDataFrame, output_dir: Path, date_key: str
+) -> list[Path]:
     outputs: list[Path] = []
     with rasterio.open(ndvi_path) as src:
         for row in selected_fields.itertuples():
@@ -272,7 +283,9 @@ def export_per_field_ndvi(ndvi_path: Path, selected_fields: gpd.GeoDataFrame, ou
                 }
             )
 
-            out_path = output_dir / "ndvi_per_field" / f"{row.county}_{row.field_id}_ndvi_{date_key}.tif"
+            out_path = (
+                output_dir / "ndvi_per_field" / f"{row.county}_{row.field_id}_ndvi_{date_key}.tif"
+            )
             out_path.parent.mkdir(parents=True, exist_ok=True)
             with rasterio.open(out_path, "w", **profile) as dst:
                 dst.write(clipped)
@@ -281,7 +294,9 @@ def export_per_field_ndvi(ndvi_path: Path, selected_fields: gpd.GeoDataFrame, ou
     return outputs
 
 
-def save_preview_png(raster_path: Path, png_path: Path, title: str, cmap: str, vmin=None, vmax=None) -> Path:
+def save_preview_png(
+    raster_path: Path, png_path: Path, title: str, cmap: str, vmin=None, vmax=None
+) -> Path:
     with rasterio.open(raster_path) as src:
         arr = src.read(1).astype(np.float32)
         nodata = src.nodata
@@ -335,7 +350,9 @@ def export_per_field_pngs(
             else:
                 vmin, vmax = fixed_range
 
-            out_path = output_dir / "fields" / f"{row.county}_{row.field_id}_{product_name}_{date_key}.png"
+            out_path = (
+                output_dir / "fields" / f"{row.county}_{row.field_id}_{product_name}_{date_key}.png"
+            )
             out_path.parent.mkdir(parents=True, exist_ok=True)
 
             fig, ax = plt.subplots(figsize=(6, 6))

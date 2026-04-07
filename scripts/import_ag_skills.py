@@ -10,8 +10,8 @@ Usage:
 """
 
 import re
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 import yaml
 
@@ -44,14 +44,14 @@ def parse_skill_md(skill_dir: Path) -> dict | None:
     skill_md = skill_dir / "SKILL.md"
     if not skill_md.exists():
         return None
-    
+
     text = skill_md.read_text(encoding="utf-8")
-    
+
     # Extract YAML frontmatter between --- markers
-    match = re.match(r'^---\s*\n(.*?)\n---\s*\n', text, re.DOTALL)
+    match = re.match(r"^---\s*\n(.*?)\n---\s*\n", text, re.DOTALL)
     if not match:
         return None
-    
+
     try:
         frontmatter = yaml.safe_load(match.group(1))
         return frontmatter if isinstance(frontmatter, dict) else None
@@ -65,32 +65,47 @@ def determine_category(skill_name: str, tags: list) -> str:
         return "data-download"
     elif skill_name in EDA_SKILLS:
         return "eda"
-    
+
     # Fallback: infer from tags
     tag_set = set(tags) if tags else set()
-    if tag_set & {"download", "usda", "nass", "sentinel-2", "landsat", "geospatial", "remote-sensing"}:
+    if tag_set & {
+        "download",
+        "usda",
+        "nass",
+        "sentinel-2",
+        "landsat",
+        "geospatial",
+        "remote-sensing",
+    }:
         return "data-download"
     elif tag_set & {"eda", "exploration", "pandas", "statistics", "analysis", "visualization"}:
         return "eda"
-    
+
     return "general"
 
 
 def create_manifest(skill_dir: Path, metadata: dict) -> dict:
     """Create Agent Skills IO format manifest from skill metadata."""
     skill_name = skill_dir.name
-    
+
     # Handle different metadata formats
     name = metadata.get("name", skill_name)
     description = metadata.get("description", "")
     version = metadata.get("version", "1.0.0")
-    author = metadata.get("author", metadata.get("metadata", {}).get("author", "Boreal Bytes") if isinstance(metadata.get("metadata"), dict) else "Boreal Bytes")
+    author = metadata.get(
+        "author",
+        (
+            metadata.get("metadata", {}).get("author", "Boreal Bytes")
+            if isinstance(metadata.get("metadata"), dict)
+            else "Boreal Bytes"
+        ),
+    )
     tags = metadata.get("tags", [])
     if isinstance(tags, str):
         tags = [t.strip() for t in tags.split(",")]
-    
+
     category = determine_category(skill_name, tags)
-    
+
     manifest = {
         "name": name,
         "version": str(version),
@@ -104,60 +119,60 @@ def create_manifest(skill_dir: Path, metadata: dict) -> dict:
         "imported_at": datetime.utcnow().isoformat() + "Z",
         "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content",
     }
-    
+
     return manifest
 
 
 def main():
     """Main import function."""
     print("Starting ag-skills import from skills-content branch...")
-    
+
     if not VENDOR.exists():
         print(f"Error: Vendor directory not found: {VENDOR}")
         return
-    
+
     # Create manifests directory
     MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     imported_count = 0
     categories = {"data-download": 0, "eda": 0, "general": 0}
-    
+
     # Find all skill directories
     for skill_dir in sorted(VENDOR.iterdir()):
         if not skill_dir.is_dir():
             continue
         if skill_dir.name.startswith("."):
             continue
-        
+
         # Check if this is a skill directory (has SKILL.md)
         skill_md = skill_dir / "SKILL.md"
         if not skill_md.exists():
             continue
-        
+
         print(f"  Processing: {skill_dir.name}")
-        
+
         # Parse SKILL.md frontmatter
         metadata = parse_skill_md(skill_dir)
         if not metadata:
             print(f"    Warning: Could not parse frontmatter for {skill_dir.name}")
             continue
-        
+
         # Create manifest
         manifest = create_manifest(skill_dir, metadata)
         category = manifest["category"]
         categories[category] = categories.get(category, 0) + 1
-        
+
         # Write manifest
         manifest_path = MANIFEST_DIR / f"{skill_dir.name}.yaml"
         with open(manifest_path, "w", encoding="utf-8") as f:
             yaml.dump(manifest, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
-        
+
         print(f"    Created: {manifest_path}")
         imported_count += 1
-    
-    print(f"\nImport complete!")
+
+    print("\nImport complete!")
     print(f"  Total skills imported: {imported_count}")
-    print(f"  Categories:")
+    print("  Categories:")
     for cat, count in categories.items():
         if count > 0:
             print(f"    - {cat}: {count}")
