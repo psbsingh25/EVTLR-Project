@@ -1,0 +1,21 @@
+name: cdl-cropland
+version: 1.0.0
+author: Boreal Bytes
+description:
+  Download USDA NASS Cropland Data Layer crop type maps for agricultural fields.
+  Use when the user needs annual crop classifications, land cover data, crop
+  rotation history, or crop type rasters clipped to field boundaries.
+license: MIT
+source: skills/vendor/ag-skills/cdl-cropland/
+entry: skills.vendor.ag-skills.cdl-cropland
+category: data-download
+tags:
+  - usda
+  - nass
+  - cdl
+  - cropland
+  - raster
+  - geospatial
+  - download
+imported_at: '2026-03-04T04:07:10.859472Z'
+original_repo: https://github.com/borealBytes/ag-skills/tree/skills-content

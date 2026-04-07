@@ -470,6 +470,27 @@ Add organization-specific context:
 
 ---
 
+## 🌾 Final project dashboard
+
+The final project dashboard is implemented as a Streamlit app titled:
+
+`East New Mexico Wheat Production System`
+
+Run it locally:
+
+```bash
+pip install -r src/apps/final_project_dashboard/requirements.txt
+streamlit run src/apps/final_project_dashboard/app.py
+```
+
+Project files:
+
+- App: `src/apps/final_project_dashboard/app.py`
+- App docs: `src/apps/final_project_dashboard/README.md`
+- AI usage summary: `docs/ai_docs.md`
+
+---
+
 ## 📖 Entry Points
 
 Start here based on what you're doing:

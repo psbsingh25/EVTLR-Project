@@ -1,0 +1,22 @@
+name: interactive-web-map
+version: 2.0.0
+author: Boreal Bytes
+description:
+  Create professional, self-contained interactive web maps for agricultural data
+  visualization. Generate single HTML files with embedded data, layer controls,
+  choropleth styling, and customizable dashboards using Leaflet.js. Handles 200+
+  fields smoothly.
+license: MIT
+source: skills/vendor/ag-skills/interactive-web-map/
+entry: skills.vendor.ag-skills.interactive-web-map
+category: data-download
+tags:
+  - web-map
+  - visualization
+  - leaflet
+  - geospatial
+  - interactive
+  - dashboard
+  - choropleth
+imported_at: '2026-03-04T04:07:10.884506Z'
+original_repo: https://github.com/borealBytes/ag-skills/tree/skills-content

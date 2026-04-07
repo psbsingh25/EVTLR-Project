@@ -1,0 +1,240 @@
+{
+  "generated_at": "2026-03-04T04:20:26.324583+00:00",
+  "skills_count": 12,
+  "categories": {
+    "data-download": [
+      {
+        "name": "cdl-cropland",
+        "description": "Download USDA NASS Cropland Data Layer crop type maps for agricultural fields. Use when the user needs annual crop classifications, land cover data, crop rotation history, or crop type rasters clipped to field boundaries.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/cdl-cropland/"
+      },
+      {
+        "name": "field-boundaries",
+        "description": "Download USDA NASS Crop Sequence Boundaries for agricultural fields. Includes functions for downloading, visualizing, and exporting field boundary data.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/field-boundaries/"
+      },
+      {
+        "name": "interactive-web-map",
+        "description": "Create professional, self-contained interactive web maps for agricultural data visualization. Generate single HTML files with embedded data, layer controls, choropleth styling, and customizable dashboards using Leaflet.js. Handles 200+ fields smoothly.",
+        "version": "2.0.0",
+        "source": "skills/vendor/ag-skills/interactive-web-map/"
+      },
+      {
+        "name": "landsat-imagery",
+        "description": "Search, download, and process Landsat 8/9 satellite imagery for agricultural fields. Use when the user needs to acquire Landsat scenes, calculate vegetation indices (NDVI/EVI), or perform long-term remote sensing analysis using standard Python libraries (landsatxplore, rasterio).",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/landsat-imagery/"
+      },
+      {
+        "name": "nasa-power-weather",
+        "description": "Download NASA POWER daily weather data for agricultural field locations. Queries the free REST API for temperature, precipitation, solar radiation, humidity, and wind. Calculates Growing Degree Days (GDD). Use when the user needs historical weather for crop modeling, irrigation planning, or climate analysis.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/nasa-power-weather/"
+      },
+      {
+        "name": "sentinel2-imagery",
+        "description": "Download Sentinel-2 Level-2A imagery for an AOI, compute NDVI with rasterio, and extract per-field NDVI statistics. Use when you need cloud-filtered Sentinel-2 scenes and field-level vegetation metrics.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/sentinel2-imagery/"
+      },
+      {
+        "name": "ssurgo-soil",
+        "description": "Download USDA NRCS SSURGO soil data for agricultural fields",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/ssurgo-soil/"
+      }
+    ],
+    "eda": [
+      {
+        "name": "eda-compare",
+        "description": "Compare groups and categories in agricultural datasets using pandas and scipy. Perform statistical tests, create comparative visualizations, and identify significant differences between groups.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/eda-compare/"
+      },
+      {
+        "name": "eda-correlate",
+        "description": "Analyze correlations between variables in agricultural datasets using pandas and scipy. Calculate correlation coefficients, identify significant relationships, and create correlation matrices with heatmaps.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/eda-correlate/"
+      },
+      {
+        "name": "eda-explore",
+        "description": "Explore and summarize agricultural datasets using pandas. Generate descriptive statistics, identify data types, find missing values, and detect outliers.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/eda-explore/"
+      },
+      {
+        "name": "eda-time-series",
+        "description": "Analyze time-based agricultural data to identify trends, seasonality, and patterns over time. Create time series plots, calculate rolling averages, detect anomalies, and forecast future values.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/eda-time-series/"
+      },
+      {
+        "name": "eda-visualize",
+        "description": "Create professional data visualizations using pandas, matplotlib, and seaborn. Generate histograms, scatter plots, box plots, bar charts, and heatmaps for agricultural data analysis.",
+        "version": "1.0.0",
+        "source": "skills/vendor/ag-skills/eda-visualize/"
+      }
+    ]
+  },
+  "skills": [
+    {
+      "name": "cdl-cropland",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Download USDA NASS Cropland Data Layer crop type maps for agricultural fields. Use when the user needs annual crop classifications, land cover data, crop rotation history, or crop type rasters clipped to field boundaries.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/cdl-cropland/",
+      "entry": "skills.vendor.ag-skills.cdl-cropland",
+      "category": "data-download",
+      "tags": ["usda", "nass", "cdl", "cropland", "raster", "geospatial", "download"],
+      "imported_at": "2026-03-04T04:07:10.859472Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "eda-compare",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Compare groups and categories in agricultural datasets using pandas and scipy. Perform statistical tests, create comparative visualizations, and identify significant differences between groups.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/eda-compare/",
+      "entry": "skills.vendor.ag-skills.eda-compare",
+      "category": "eda",
+      "tags": ["comparison", "statistics", "groups", "pandas", "scipy"],
+      "imported_at": "2026-03-04T04:07:10.865846Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "eda-correlate",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Analyze correlations between variables in agricultural datasets using pandas and scipy. Calculate correlation coefficients, identify significant relationships, and create correlation matrices with heatmaps.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/eda-correlate/",
+      "entry": "skills.vendor.ag-skills.eda-correlate",
+      "category": "eda",
+      "tags": ["correlation", "statistics", "pandas", "scipy", "analysis"],
+      "imported_at": "2026-03-04T04:07:10.868561Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "eda-explore",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Explore and summarize agricultural datasets using pandas. Generate descriptive statistics, identify data types, find missing values, and detect outliers.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/eda-explore/",
+      "entry": "skills.vendor.ag-skills.eda-explore",
+      "category": "eda",
+      "tags": ["eda", "exploration", "pandas", "statistics", "analysis"],
+      "imported_at": "2026-03-04T04:07:10.870902Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "eda-time-series",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Analyze time-based agricultural data to identify trends, seasonality, and patterns over time. Create time series plots, calculate rolling averages, detect anomalies, and forecast future values.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/eda-time-series/",
+      "entry": "skills.vendor.ag-skills.eda-time-series",
+      "category": "eda",
+      "tags": ["eda", "time-series", "pandas", "matplotlib", "agriculture", "forecasting"],
+      "imported_at": "2026-03-04T04:07:10.873938Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "eda-visualize",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Create professional data visualizations using pandas, matplotlib, and seaborn. Generate histograms, scatter plots, box plots, bar charts, and heatmaps for agricultural data analysis.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/eda-visualize/",
+      "entry": "skills.vendor.ag-skills.eda-visualize",
+      "category": "eda",
+      "tags": ["visualization", "plotting", "matplotlib", "seaborn", "pandas"],
+      "imported_at": "2026-03-04T04:07:10.876486Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "field-boundaries",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Download USDA NASS Crop Sequence Boundaries for agricultural fields. Includes functions for downloading, visualizing, and exporting field boundary data.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/field-boundaries/",
+      "entry": "skills.vendor.ag-skills.field-boundaries",
+      "category": "data-download",
+      "tags": ["usda", "nass", "boundaries", "geospatial", "download"],
+      "imported_at": "2026-03-04T04:07:10.881418Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "interactive-web-map",
+      "version": "2.0.0",
+      "author": "Boreal Bytes",
+      "description": "Create professional, self-contained interactive web maps for agricultural data visualization. Generate single HTML files with embedded data, layer controls, choropleth styling, and customizable dashboards using Leaflet.js. Handles 200+ fields smoothly.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/interactive-web-map/",
+      "entry": "skills.vendor.ag-skills.interactive-web-map",
+      "category": "data-download",
+      "tags": ["web-map", "visualization", "leaflet", "geospatial", "interactive", "dashboard", "choropleth"],
+      "imported_at": "2026-03-04T04:07:10.884506Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "landsat-imagery",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Search, download, and process Landsat 8/9 satellite imagery for agricultural fields. Use when the user needs to acquire Landsat scenes, calculate vegetation indices (NDVI/EVI), or perform long-term remote sensing analysis using standard Python libraries (landsatxplore, rasterio).",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/landsat-imagery/",
+      "entry": "skills.vendor.ag-skills.landsat-imagery",
+      "category": "data-download",
+      "tags": ["landsat", "usgs", "satellite", "ndvi", "rasterio", "remote-sensing", "geospatial"],
+      "imported_at": "2026-03-04T04:07:10.887481Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "nasa-power-weather",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Download NASA POWER daily weather data for agricultural field locations. Queries the free REST API for temperature, precipitation, solar radiation, humidity, and wind. Calculates Growing Degree Days (GDD). Use when the user needs historical weather for crop modeling, irrigation planning, or climate analysis.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/nasa-power-weather/",
+      "entry": "skills.vendor.ag-skills.nasa-power-weather",
+      "category": "data-download",
+      "tags": ["nasa", "power", "weather", "climate", "agriculture", "api", "gdd"],
+      "imported_at": "2026-03-04T04:07:10.890594Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "sentinel2-imagery",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Download Sentinel-2 Level-2A imagery for an AOI, compute NDVI with rasterio, and extract per-field NDVI statistics. Use when you need cloud-filtered Sentinel-2 scenes and field-level vegetation metrics.",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/sentinel2-imagery/",
+      "entry": "skills.vendor.ag-skills.sentinel2-imagery",
+      "category": "data-download",
+      "tags": [],
+      "imported_at": "2026-03-04T04:07:10.899171Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    },
+    {
+      "name": "ssurgo-soil",
+      "version": "1.0.0",
+      "author": "Boreal Bytes",
+      "description": "Download USDA NRCS SSURGO soil data for agricultural fields",
+      "license": "MIT",
+      "source": "skills/vendor/ag-skills/ssurgo-soil/",
+      "entry": "skills.vendor.ag-skills.ssurgo-soil",
+      "category": "data-download",
+      "tags": ["usda", "nrcs", "ssurgo", "soil", "geospatial", "download"],
+      "imported_at": "2026-03-04T04:07:10.901641Z",
+      "original_repo": "https://github.com/borealBytes/ag-skills/tree/skills-content"
+    }
+  ]
+}

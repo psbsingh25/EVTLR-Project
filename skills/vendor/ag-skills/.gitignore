@@ -1,0 +1,76 @@
+# Agricultural Data Skills - Gitignore
+# 
+# This file ensures generated data outputs are not committed to git.
+# Only examples/ directory should be committed (small sample data).
+
+# Data outputs - never commit
+data/
+*.geojson
+*.tif
+*.tiff
+*.nc
+*.csv
+*.txt
+*.xlsx
+*.parquet
+*.shp
+*.shx
+*.dbf
+*.prj
+*.sbn
+*.sbx
+*.xml
+
+# Plot outputs
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.svg
+*.html
+
+# Jupyter notebooks (unless specifically wanted)
+*.ipynb
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Large binary files
+*.zip
+*.tar
+*.gz
+*.rar
+
+# Keep examples (explicit allow)
+!examples/*
+!examples/**/*
+!*/examples/*
+!*/examples/**/*
+
+# Keep data/README.md files (documentation only)
+!data/README.md

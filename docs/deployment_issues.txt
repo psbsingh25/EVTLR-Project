@@ -1,0 +1,58 @@
+Final Dashboard Deployment Issues Log
+Date: 2026-04-07
+Branch: feat/final-project-dashboard
+
+Purpose
+- Capture the main issues faced while preparing and deploying the Streamlit dashboard.
+- Document key user questions and requests that guided the final fixes.
+
+Issues Faced During Deployment
+1) Title mismatch with assignment requirement
+- Issue: The dashboard was initially titled "Curry County New Mexico Wheat Production Systems".
+- Required: "East New Mexico Wheat Production System".
+- Resolution: Updated title references in app and related docs.
+
+2) Streamlit Cloud file availability mismatch
+- Issue: App depended on local files under data/, but those files are gitignored and not available on Streamlit Cloud runtime.
+- Impact: Weather and NDVI sections crashed in cloud deployment.
+- Resolution: Migrated weather section to static committed asset and added NDVI summary fallback CSV in output/dashboard_assets.
+
+3) Weather section render problem
+- Issue: User reported weather trends showed errors and partial visibility (only part of chart visible unless clicked).
+- Resolution: Weather section switched to static weather image with larger render height for full visibility.
+
+4) NDVI map duplication in UI
+- Issue: Duplicate NDVI map presentations were visible in the app.
+- Resolution: Removed repeated NDVI map block and kept single combined NDVI map section.
+
+5) Missing NDVI summary table in cloud
+- Issue: Message shown: NDVI summary table unavailable because source CSV missing.
+- Cause: CSV source was not tracked in repo due to data ignore rules.
+- Resolution: Added committed fallback summary file: output/dashboard_assets/curry_ndvi_summary.csv.
+
+6) Zoom behavior regression
+- Issue: Clicking map sometimes appeared to make image smaller vs earlier behavior.
+- Resolution: Added stronger modal zoom UX with larger viewport and controls (+, -, reset, mouse wheel zoom).
+
+7) Streamlit running stale code after push
+- Issue: Deployed app stack traces did not match latest branch code.
+- Cause: Streamlit app was running older commit/configuration.
+- Resolution: Required app reboot/redeploy from correct branch and cache clear.
+
+User Questions and Requests That Drove Changes
+- "correct the title, also update the docs file with latest information presented..."
+- "instead of merging this into main, lets push it as branch..."
+- "the weather trends map is showing error on the app. and then i am not seeing the soil scorecard and ndvi maps."
+- "2. i want to have it interactive."
+- "commot and push"
+- "still the there's an error with curry county weather trends. Lets make it static. and i see there are duplicates of ndvi maps. remove one"
+- "in the ai narrative section, i want to remove the 'AI Narrative' wording... add a new mexico state map on Navigation section..."
+- "also the ndvi summary table csv file is missing..."
+- "add following narrative to ndvi maps..."
+- "polish the grammer while preserving the meaning"
+- "yes commit and push but first create a text file highlighting issues we faced..."
+
+Outcome
+- App moved toward cloud-safe behavior by relying on committed assets and fallback files.
+- UI and narrative were adapted to user expectations for presentation and clarity.
+- Final branch remains suitable for review before merging into main.
