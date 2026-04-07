@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import base64
-import json
 from pathlib import Path
 
 import pandas as pd
@@ -13,10 +12,7 @@ import streamlit.components.v1 as components
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 ASSETS_DIR = REPO_ROOT / "output" / "dashboard_assets"
-WEATHER_PATH = REPO_ROOT / "data" / "weather" / "nm_weather_2005_2020.csv"
-FIELDS_PATH = REPO_ROOT / "data" / "boundaries" / "nm_top_200_fields.geojson"
 NDVI_STATS_PATH = REPO_ROOT / "data" / "imagery" / "assignment-07" / "fields_with_mean_ndvi_soil.csv"
-CURRY_WEATHER_AGG_PATH = ASSETS_DIR / "curry_weather_daily_2005_2020.csv"
 
 
 st.set_page_config(
@@ -87,47 +83,6 @@ def render_zoomable_image(image_path: Path, caption: str, element_id: str) -> No
 
 
 @st.cache_data
-def load_field_county_lookup() -> dict[str, str]:
-    """Load field to county mapping from GeoJSON."""
-
-    payload = json.loads(FIELDS_PATH.read_text(encoding="utf-8"))
-    return {
-        feature["properties"]["field_id"]: feature["properties"]["county"]
-        for feature in payload["features"]
-    }
-
-
-@st.cache_data
-def load_weather_trends() -> pd.DataFrame:
-    """Load Curry weather trends from committed aggregate or raw source data."""
-
-    if CURRY_WEATHER_AGG_PATH.exists():
-        grouped = pd.read_csv(CURRY_WEATHER_AGG_PATH, parse_dates=["date"]).sort_values("date")
-    elif WEATHER_PATH.exists() and FIELDS_PATH.exists():
-        weather = pd.read_csv(WEATHER_PATH, parse_dates=["date"])
-        county_lookup = load_field_county_lookup()
-        weather["county"] = weather["field_id"].map(county_lookup)
-        curry = weather[weather["county"] == "Curry"].copy()
-
-        curry["high_f"] = (curry["T2M_MAX"] * 9 / 5) + 32
-        grouped = (
-            curry.groupby("date", as_index=False)
-            .agg(
-                high_f=("high_f", "mean"),
-                precip_mm=("PRECTOTCORR", "mean"),
-            )
-            .sort_values("date")
-        )
-    else:
-        return pd.DataFrame()
-
-    grouped["high_f_roll15"] = grouped["high_f"].rolling(15, min_periods=1).mean()
-    grouped["precip_roll15"] = grouped["precip_mm"].rolling(15, min_periods=1).mean()
-    grouped["is_heat_alert"] = grouped["high_f_roll15"] > 105
-    return grouped
-
-
-@st.cache_data
 def load_ndvi_stats() -> pd.DataFrame:
     """Load Assignment 07 NDVI per-field stats."""
 
@@ -194,39 +149,15 @@ def render_productivity_section() -> None:
 
 
 def render_weather_section() -> None:
-    """Render weather trend section."""
+    """Render static weather trend section."""
 
     st.subheader("3) Curry County Weather Trends")
-    weather = load_weather_trends()
-    if weather.empty:
-        st.error(
-            "Weather trends are unavailable because required weather source files are missing."
-        )
-        return
-
-    min_date = weather["date"].min().date()
-    max_date = weather["date"].max().date()
-    selected_dates = st.slider(
-        "Date range",
-        min_value=min_date,
-        max_value=max_date,
-        value=(min_date, max_date),
-        format="YYYY-MM-DD",
+    weather_path = ASSETS_DIR / "weather_trends.png"
+    render_zoomable_image(
+        weather_path,
+        "Curry County weather trends",
+        "weathertrends",
     )
-
-    subset = weather[
-        (weather["date"].dt.date >= selected_dates[0])
-        & (weather["date"].dt.date <= selected_dates[1])
-    ].copy()
-
-    st.markdown("**15-day smoothed maximum temperature (F)**")
-    st.line_chart(subset.set_index("date")["high_f_roll15"], height=260)
-
-    st.markdown("**15-day smoothed precipitation (mm)**")
-    st.line_chart(subset.set_index("date")["precip_roll15"], height=260)
-
-    heat_days = int(subset["is_heat_alert"].sum())
-    st.metric("Heat-alert days (15-day avg > 105F)", heat_days)
 
     st.info(
         "AI narrative: Curry County seasonal climate shows clear heat-pressure "
@@ -264,26 +195,6 @@ def render_ndvi_section() -> None:
         "Combined Curry NDVI maps with field-level zoom panels",
         "ndvicombined",
     )
-
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        render_zoomable_image(
-            ASSETS_DIR / "integrated_spatial_analysis_curry_nm_field_019.png",
-            "Curry NM_FIELD_019 NDVI map",
-            "ndvi019",
-        )
-    with col2:
-        render_zoomable_image(
-            ASSETS_DIR / "integrated_spatial_analysis_curry_nm_field_060.png",
-            "Curry NM_FIELD_060 NDVI map",
-            "ndvi060",
-        )
-    with col3:
-        render_zoomable_image(
-            ASSETS_DIR / "integrated_spatial_analysis_curry_nm_field_188.png",
-            "Curry NM_FIELD_188 NDVI map",
-            "ndvi188",
-        )
 
     ndvi = load_ndvi_stats()
     if ndvi.empty:

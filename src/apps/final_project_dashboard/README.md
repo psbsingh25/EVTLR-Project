@@ -12,9 +12,9 @@ Sections included:
 
 - Total crop estimated area (`2020`)
 - Winter wheat productivity (`Top 5 vs Bottom 5`)
-- Curry County weather trends
+- Curry County weather trends (static figure)
 - Soil health and sustainability scorecard
-- Curry NDVI maps with zoom-in modal behavior and threshold alerts
+- Curry NDVI combined map with zoom-in modal behavior and threshold alerts
 
 ---
 
@@ -41,15 +41,10 @@ and the dependency file to:
 - `output/dashboard_assets/wheat_productivity_top5_bottom5.png`
 - `output/dashboard_assets/soil_health_metrics.png`
 - `output/dashboard_assets/integrated_spatial_analysis_curry_combined.png`
-- `output/dashboard_assets/integrated_spatial_analysis_curry_nm_field_019.png`
-- `output/dashboard_assets/integrated_spatial_analysis_curry_nm_field_060.png`
-- `output/dashboard_assets/integrated_spatial_analysis_curry_nm_field_188.png`
-- `output/dashboard_assets/curry_weather_daily_2005_2020.csv`
+- `output/dashboard_assets/weather_trends.png`
 - `data/weather/nm_weather_2005_2020.csv`
 - `data/boundaries/nm_top_200_fields.geojson`
 - `data/imagery/assignment-07/fields_with_mean_ndvi_soil.csv`
-
-The dashboard uses the committed aggregate weather file for cloud deployment while preserving interactive date-range filtering.
 
 ---
 
