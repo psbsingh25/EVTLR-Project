@@ -44,9 +44,12 @@ and the dependency file to:
 - `output/dashboard_assets/integrated_spatial_analysis_curry_nm_field_019.png`
 - `output/dashboard_assets/integrated_spatial_analysis_curry_nm_field_060.png`
 - `output/dashboard_assets/integrated_spatial_analysis_curry_nm_field_188.png`
+- `output/dashboard_assets/curry_weather_daily_2005_2020.csv`
 - `data/weather/nm_weather_2005_2020.csv`
 - `data/boundaries/nm_top_200_fields.geojson`
 - `data/imagery/assignment-07/fields_with_mean_ndvi_soil.csv`
+
+The dashboard uses the committed aggregate weather file for cloud deployment while preserving interactive date-range filtering.
 
 ---
 

@@ -50,6 +50,7 @@ streamlit run src/apps/final_project_dashboard/app.py
   - Pass: Prettier, ESLint, Markdownlint, Stylelint, Website Build
   - Fail: Link Check (TLS `UnknownIssuer` in this environment), CrewAI Tests (existing test collection failures)
   - Skip/Warn: Ruff missing, CrewAI review missing `OPENROUTER_API_KEY`, local deploy skipped, commitlint warning
+- ✅ Streamlit-cloud hardening: weather trends now source from committed `output/dashboard_assets/curry_weather_daily_2005_2020.csv` while preserving interactivity; missing source CSV files no longer block downstream dashboard sections.
 
 ---
 

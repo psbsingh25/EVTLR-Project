@@ -16,6 +16,7 @@ ASSETS_DIR = REPO_ROOT / "output" / "dashboard_assets"
 WEATHER_PATH = REPO_ROOT / "data" / "weather" / "nm_weather_2005_2020.csv"
 FIELDS_PATH = REPO_ROOT / "data" / "boundaries" / "nm_top_200_fields.geojson"
 NDVI_STATS_PATH = REPO_ROOT / "data" / "imagery" / "assignment-07" / "fields_with_mean_ndvi_soil.csv"
+CURRY_WEATHER_AGG_PATH = ASSETS_DIR / "curry_weather_daily_2005_2020.csv"
 
 
 st.set_page_config(
@@ -98,22 +99,28 @@ def load_field_county_lookup() -> dict[str, str]:
 
 @st.cache_data
 def load_weather_trends() -> pd.DataFrame:
-    """Load and aggregate Curry weather trend data."""
+    """Load Curry weather trends from committed aggregate or raw source data."""
 
-    weather = pd.read_csv(WEATHER_PATH, parse_dates=["date"])
-    county_lookup = load_field_county_lookup()
-    weather["county"] = weather["field_id"].map(county_lookup)
-    curry = weather[weather["county"] == "Curry"].copy()
+    if CURRY_WEATHER_AGG_PATH.exists():
+        grouped = pd.read_csv(CURRY_WEATHER_AGG_PATH, parse_dates=["date"]).sort_values("date")
+    elif WEATHER_PATH.exists() and FIELDS_PATH.exists():
+        weather = pd.read_csv(WEATHER_PATH, parse_dates=["date"])
+        county_lookup = load_field_county_lookup()
+        weather["county"] = weather["field_id"].map(county_lookup)
+        curry = weather[weather["county"] == "Curry"].copy()
 
-    curry["high_f"] = (curry["T2M_MAX"] * 9 / 5) + 32
-    grouped = (
-        curry.groupby("date", as_index=False)
-        .agg(
-            high_f=("high_f", "mean"),
-            precip_mm=("PRECTOTCORR", "mean"),
+        curry["high_f"] = (curry["T2M_MAX"] * 9 / 5) + 32
+        grouped = (
+            curry.groupby("date", as_index=False)
+            .agg(
+                high_f=("high_f", "mean"),
+                precip_mm=("PRECTOTCORR", "mean"),
+            )
+            .sort_values("date")
         )
-        .sort_values("date")
-    )
+    else:
+        return pd.DataFrame()
+
     grouped["high_f_roll15"] = grouped["high_f"].rolling(15, min_periods=1).mean()
     grouped["precip_roll15"] = grouped["precip_mm"].rolling(15, min_periods=1).mean()
     grouped["is_heat_alert"] = grouped["high_f_roll15"] > 105
@@ -123,6 +130,11 @@ def load_weather_trends() -> pd.DataFrame:
 @st.cache_data
 def load_ndvi_stats() -> pd.DataFrame:
     """Load Assignment 07 NDVI per-field stats."""
+
+    if not NDVI_STATS_PATH.exists():
+        return pd.DataFrame(
+            columns=["field_id", "mean_ndvi", "ndvi_status", "soil_name", "drainage"]
+        )
 
     frame = pd.read_csv(NDVI_STATS_PATH)
     curry = frame[frame["county"] == "Curry"].copy()
@@ -186,6 +198,11 @@ def render_weather_section() -> None:
 
     st.subheader("3) Curry County Weather Trends")
     weather = load_weather_trends()
+    if weather.empty:
+        st.error(
+            "Weather trends are unavailable because required weather source files are missing."
+        )
+        return
 
     min_date = weather["date"].min().date()
     max_date = weather["date"].max().date()
@@ -269,6 +286,13 @@ def render_ndvi_section() -> None:
         )
 
     ndvi = load_ndvi_stats()
+    if ndvi.empty:
+        st.warning(
+            "NDVI field summary table is unavailable because the source NDVI CSV is missing. "
+            "Maps are still shown from committed dashboard assets."
+        )
+        return
+
     low_ndvi = ndvi[ndvi["mean_ndvi"] < 0.3]
 
     st.markdown("**Curry field NDVI summary**")

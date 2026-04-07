@@ -52,6 +52,7 @@ _Feature work record for building the final interactive dashboard with Assignmen
   - Pass: Prettier, ESLint, Markdownlint, Stylelint, Website Build
   - Fail: Link Check (TLS `UnknownIssuer` in this environment), CrewAI Tests (existing collection errors in `.crewai/tests/*`)
   - Skip/Warn: Ruff not installed, CrewAI Review missing `OPENROUTER_API_KEY`, deploy stages disabled in local mode, commitlint warning
+- ✅ Streamlit-cloud hardening added: weather trends now load from committed `output/dashboard_assets/curry_weather_daily_2005_2020.csv` with interactive date filtering; NDVI/weather sections now fail gracefully if source CSV files are unavailable.
 - 🔄 Remaining: publish Streamlit app URL and complete PR flow.
 
 ---
