@@ -6,7 +6,7 @@ _Streamlit application for the final project dashboard deliverable._
 
 ## 📋 Overview
 
-This app consolidates required Assignment 03-08 outputs into one interactive dashboard with AI narrative interpretation.
+This app consolidates required Assignment 03-08 outputs into one interactive dashboard with section-level interpretation panels.
 
 Sections included:
 
@@ -14,7 +14,7 @@ Sections included:
 - Winter wheat productivity (`Top 5 vs Bottom 5`)
 - Curry County weather trends (static figure)
 - Soil health and sustainability scorecard
-- Curry NDVI combined map with zoom-in modal behavior and threshold alerts
+- Curry NDVI combined map with zoom controls and threshold alerts
 
 ---
 
@@ -42,15 +42,14 @@ and the dependency file to:
 - `output/dashboard_assets/soil_health_metrics.png`
 - `output/dashboard_assets/integrated_spatial_analysis_curry_combined.png`
 - `output/dashboard_assets/weather_trends.png`
-- `data/weather/nm_weather_2005_2020.csv`
-- `data/boundaries/nm_top_200_fields.geojson`
-- `data/imagery/assignment-07/fields_with_mean_ndvi_soil.csv`
+- `output/dashboard_assets/curry_ndvi_summary.csv`
+- `data/imagery/assignment-07/fields_with_mean_ndvi_soil.csv` (local fallback)
 
 ---
 
-## 🤖 AI narratives and NDVI alerts
+## 📌 Interpretation and NDVI alerts
 
-- Each section includes an AI narrative panel with interpretation and suggested action.
+- Each section includes an interpretation panel with decision-focused context and suggested action.
 - NDVI alerting is rule-based: values below `0.3` are flagged as low vegetation vigor.
 
 ---

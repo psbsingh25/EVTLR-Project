@@ -13,6 +13,7 @@ import streamlit.components.v1 as components
 REPO_ROOT = Path(__file__).resolve().parents[3]
 ASSETS_DIR = REPO_ROOT / "output" / "dashboard_assets"
 NDVI_STATS_PATH = REPO_ROOT / "data" / "imagery" / "assignment-07" / "fields_with_mean_ndvi_soil.csv"
+NDVI_SUMMARY_FALLBACK_PATH = ASSETS_DIR / "curry_ndvi_summary.csv"
 
 
 st.set_page_config(
@@ -28,7 +29,12 @@ def image_exists(path: Path) -> bool:
     return path.exists() and path.is_file()
 
 
-def render_zoomable_image(image_path: Path, caption: str, element_id: str) -> None:
+def render_zoomable_image(
+    image_path: Path,
+    caption: str,
+    element_id: str,
+    component_height: int = 700,
+) -> None:
     """Render image with click-to-zoom modal using inline HTML."""
 
     if not image_exists(image_path):
@@ -46,17 +52,22 @@ def render_zoomable_image(image_path: Path, caption: str, element_id: str) -> No
       />
       <p style="font-size:0.9rem; color:#4b5563; margin-top:0.35rem;">{caption} (click image to zoom)</p>
     </div>
-    <div id="modal-{element_id}" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:99999; align-items:center; justify-content:center; padding:2rem;">
-      <div style="position:relative; max-width:96vw; max-height:94vh;">
-        <button
-          id="close-{element_id}"
-          style="position:absolute; right:0; top:-2.25rem; padding:0.35rem 0.75rem; border-radius:6px; border:1px solid #fff; color:#fff; background:rgba(0,0,0,0.35); cursor:pointer;"
-        >Close</button>
-        <img
-          src="data:image/png;base64,{encoded}"
-          alt="{caption}"
-          style="max-width:96vw; max-height:90vh; border-radius:8px; border:2px solid #fff;"
-        />
+    <div id="modal-{element_id}" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; padding:1rem;">
+      <div style="position:relative; width:96vw; max-width:1700px;">
+        <div style="position:absolute; right:0; top:-2.5rem; display:flex; gap:0.5rem;">
+          <button id="zoom-in-{element_id}" style="padding:0.35rem 0.75rem; border-radius:6px; border:1px solid #fff; color:#fff; background:rgba(0,0,0,0.35); cursor:pointer;">+</button>
+          <button id="zoom-out-{element_id}" style="padding:0.35rem 0.75rem; border-radius:6px; border:1px solid #fff; color:#fff; background:rgba(0,0,0,0.35); cursor:pointer;">-</button>
+          <button id="zoom-reset-{element_id}" style="padding:0.35rem 0.75rem; border-radius:6px; border:1px solid #fff; color:#fff; background:rgba(0,0,0,0.35); cursor:pointer;">Reset</button>
+          <button id="close-{element_id}" style="padding:0.35rem 0.75rem; border-radius:6px; border:1px solid #fff; color:#fff; background:rgba(0,0,0,0.35); cursor:pointer;">Close</button>
+        </div>
+        <div id="viewport-{element_id}" style="width:96vw; max-width:1700px; height:88vh; overflow:auto; border-radius:8px; border:2px solid #fff; background:#0b1220;">
+          <img
+            id="zoom-img-{element_id}"
+            src="data:image/png;base64,{encoded}"
+            alt="{caption}"
+            style="display:block; width:min(1600px, 96vw); max-width:none; height:auto; transform:scale(1); transform-origin:top left; border-radius:6px;"
+          />
+        </div>
       </div>
     </div>
     <script>
@@ -64,9 +75,31 @@ def render_zoomable_image(image_path: Path, caption: str, element_id: str) -> No
         const image = document.getElementById("img-{element_id}");
         const modal = document.getElementById("modal-{element_id}");
         const closeButton = document.getElementById("close-{element_id}");
+        const zoomImage = document.getElementById("zoom-img-{element_id}");
+        const viewport = document.getElementById("viewport-{element_id}");
+        const zoomIn = document.getElementById("zoom-in-{element_id}");
+        const zoomOut = document.getElementById("zoom-out-{element_id}");
+        const zoomReset = document.getElementById("zoom-reset-{element_id}");
+        let scale = 1;
+
+        const setScale = (nextScale) => {{
+          scale = Math.max(1, Math.min(4, nextScale));
+          zoomImage.style.transform = `scale(${{scale}})`;
+        }};
+
         image.addEventListener("click", () => {{
+          setScale(1);
           modal.style.display = "flex";
         }});
+        zoomIn.addEventListener("click", () => setScale(scale + 0.25));
+        zoomOut.addEventListener("click", () => setScale(scale - 0.25));
+        zoomReset.addEventListener("click", () => setScale(1));
+        viewport.addEventListener("wheel", (event) => {{
+          if (!modal || modal.style.display !== "flex") return;
+          event.preventDefault();
+          const delta = event.deltaY < 0 ? 0.15 : -0.15;
+          setScale(scale + delta);
+        }}, {{ passive: false }});
         closeButton.addEventListener("click", () => {{
           modal.style.display = "none";
         }});
@@ -79,24 +112,49 @@ def render_zoomable_image(image_path: Path, caption: str, element_id: str) -> No
       }})();
     </script>
     """
-    components.html(html, height=700)
+    components.html(html, height=component_height)
 
 
 @st.cache_data
 def load_ndvi_stats() -> pd.DataFrame:
     """Load Assignment 07 NDVI per-field stats."""
 
-    if not NDVI_STATS_PATH.exists():
-        return pd.DataFrame(
-            columns=["field_id", "mean_ndvi", "ndvi_status", "soil_name", "drainage"]
-        )
+    columns = ["field_id", "mean_ndvi", "ndvi_status", "soil_name", "drainage"]
+    if NDVI_SUMMARY_FALLBACK_PATH.exists():
+        curry = pd.read_csv(NDVI_SUMMARY_FALLBACK_PATH)
+    elif NDVI_STATS_PATH.exists():
+        frame = pd.read_csv(NDVI_STATS_PATH)
+        curry = frame[frame["county"] == "Curry"].copy()
+    else:
+        return pd.DataFrame(columns=columns)
 
-    frame = pd.read_csv(NDVI_STATS_PATH)
-    curry = frame[frame["county"] == "Curry"].copy()
+    for required in ["field_id", "mean_ndvi", "soil_name", "drainage"]:
+        if required not in curry.columns:
+            curry[required] = ""
+
+    curry["mean_ndvi"] = pd.to_numeric(curry["mean_ndvi"], errors="coerce")
+    curry = curry.dropna(subset=["mean_ndvi"]).copy()
     curry["ndvi_status"] = curry["mean_ndvi"].apply(
         lambda value: "Low vegetation" if value < 0.3 else "Healthy-to-moderate"
     )
-    return curry.sort_values("mean_ndvi")
+    return curry[columns].sort_values("mean_ndvi")
+
+
+def render_sidebar_branding() -> None:
+    """Render sidebar branding visuals for New Mexico context."""
+
+    st.sidebar.markdown(
+        """
+        <div style="padding:0.35rem 0 0.75rem 0;">
+          <svg viewBox="0 0 220 170" width="100%" aria-label="New Mexico map">
+            <path d="M48 20 L172 20 L172 138 L48 138 L48 20 Z" fill="#f4e4bc" stroke="#5b2d0d" stroke-width="4" />
+            <path d="M48 54 L66 54 L66 70 L84 70 L84 86 L110 86 L110 98 L172 98" fill="none" stroke="#8a4b16" stroke-width="4" />
+            <text x="110" y="88" text-anchor="middle" fill="#c1121f" font-size="42" font-weight="700" font-family="Georgia, serif">NM</text>
+          </svg>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_header() -> None:
@@ -105,7 +163,12 @@ def render_header() -> None:
     st.title("East New Mexico Wheat Production System")
     st.caption(
         "Final project dashboard combining Assignment 03-08 visuals, "
-        "Curry-focused climate/NDVI interpretation, and AI narratives."
+        "Curry-focused climate/NDVI interpretation, and decision-focused insights."
+    )
+    st.markdown(
+        "East New Mexico is the home of New Mexico Dairy and related "
+        "livestock-cropping systems. Winter wheat is an important irrigated "
+        "and dryland crop of this region."
     )
     st.markdown(
         "Use the section navigator in the sidebar to move through crop area, "
@@ -124,7 +187,7 @@ def render_crop_section() -> None:
         "crop2020",
     )
     st.info(
-        "AI narrative: The 2020 acreage profile is concentrated in a few dominant "
+        "The 2020 acreage profile is concentrated in a few dominant "
         "crop classes, which suggests production risk is tied to a narrow crop mix. "
         "Diversifying crop classes can reduce exposure to weather and market shocks."
     )
@@ -141,7 +204,7 @@ def render_productivity_section() -> None:
         "productivity",
     )
     st.info(
-        "AI narrative: The top-vs-bottom split highlights structural performance "
+        "The top-vs-bottom split highlights structural performance "
         "gaps across fields, likely tied to soil quality, water retention, and "
         "microclimate differences. Prioritize management interventions on the bottom "
         "group and benchmark them against top-field practices."
@@ -157,10 +220,11 @@ def render_weather_section() -> None:
         weather_path,
         "Curry County weather trends",
         "weathertrends",
+        component_height=1200,
     )
 
     st.info(
-        "AI narrative: Curry County seasonal climate shows clear heat-pressure "
+        "Curry County seasonal climate shows clear heat-pressure "
         "periods and variable rainfall intervals. Clusters of high smoothed "
         "temperature with low precipitation indicate stress windows where irrigation "
         "timing and heat-resilient practices have the highest payoff."
@@ -178,7 +242,7 @@ def render_soil_section() -> None:
         "soilscore",
     )
     st.info(
-        "AI narrative: The scorecard surfaces differences in OM, pH suitability, "
+        "The scorecard surfaces differences in OM, pH suitability, "
         "and CEC-linked fertility behavior across counties. Use it as a management "
         "prioritization lens: fields with weaker composite profiles should be first "
         "for soil amendment and long-term resilience planning."
@@ -199,8 +263,9 @@ def render_ndvi_section() -> None:
     ndvi = load_ndvi_stats()
     if ndvi.empty:
         st.warning(
-            "NDVI field summary table is unavailable because the source NDVI CSV is missing. "
-            "Maps are still shown from committed dashboard assets."
+            "NDVI field summary table is unavailable because the source NDVI files are "
+            "missing from this environment. Maps are still shown from committed dashboard "
+            "assets."
         )
         return
 
@@ -224,14 +289,23 @@ def render_ndvi_section() -> None:
         st.success("All Curry NDVI values are at or above 0.3 for the selected date.")
 
     st.info(
-        "AI narrative: Spatial NDVI contrasts show where canopy development is lagging "
-        "inside Curry County. The NDVI threshold rule (< 0.3) is used as a rapid triage "
-        "signal for low vegetation performance and targeted intervention."
+        "These three are the top wheat-producing fields in Curry County, New Mexico. "
+        "As we can see, all three fields have an NDVI index below 0.4, which indicates "
+        "that wheat crops are under stress. This is common in this part of the country, "
+        "as water resources are diminishing and farmers are increasingly forced to "
+        "deficit-irrigate their fields."
     )
 
 
 def main() -> None:
     """Run the final dashboard app."""
+
+    render_sidebar_branding()
+
+    st.sidebar.markdown(
+        "<div style='height:1rem;'></div>",
+        unsafe_allow_html=True,
+    )
 
     render_header()
 
@@ -244,6 +318,13 @@ def main() -> None:
         "5) NDVI maps and alerts",
     ]
     selected = st.sidebar.radio("Navigate sections", sections)
+
+    st.sidebar.markdown(
+        "<div style='position:relative; margin-top:2rem; color:#8b1d1d; font-weight:700;'>"
+        "🌶️ New Mexico Chile"
+        "</div>",
+        unsafe_allow_html=True,
+    )
 
     if selected == "All sections":
         render_crop_section()

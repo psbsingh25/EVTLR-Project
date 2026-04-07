@@ -7,7 +7,7 @@ _Repository PR record for branch `feat/final-project-dashboard`._
 ## 📋 Summary
 
 - Build a final interactive Streamlit dashboard that consolidates required assignment visuals into one project deliverable.
-- Add AI narrative interpretation across all sections, including NDVI low-vegetation threshold alerts.
+- Add section-level interpretation across all sections, including NDVI low-vegetation threshold alerts.
 
 ---
 
@@ -40,7 +40,7 @@ streamlit run src/apps/final_project_dashboard/app.py
 ./scripts/ci-local.sh
 ```
 
-- Verify required sections, AI narratives, and NDVI threshold alerts render correctly.
+- Verify required sections, interpretation panels, and NDVI threshold alerts render correctly.
 
 ### Validation results
 
@@ -50,7 +50,7 @@ streamlit run src/apps/final_project_dashboard/app.py
   - Pass: Prettier, ESLint, Markdownlint, Stylelint, Website Build
   - Fail: Link Check (TLS `UnknownIssuer` in this environment), CrewAI Tests (existing test collection failures)
   - Skip/Warn: Ruff missing, CrewAI review missing `OPENROUTER_API_KEY`, local deploy skipped, commitlint warning
-- ✅ Streamlit-cloud hardening: weather trends now source from committed `output/dashboard_assets/curry_weather_daily_2005_2020.csv` while preserving interactivity; missing source CSV files no longer block downstream dashboard sections.
+- ✅ Streamlit-cloud hardening: weather trends now use committed static assets, NDVI summary can load from committed `output/dashboard_assets/curry_ndvi_summary.csv`, and missing source CSV files no longer block downstream dashboard sections.
 
 ---
 
